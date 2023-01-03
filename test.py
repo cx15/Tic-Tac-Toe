@@ -14,6 +14,10 @@ class BasicFunctionTests(u.TestCase):
         main.modifyArray(8, "O")
         self.assertEqual(main.Board[2][1], "O", "Last row, 2nd element should be O")
         
+    def test_check_for_winner(self):
+      # TODO: write a test to confirm this function does what you expect.
+      pass
+
 
 if __name__ == '__main__':
     u.main()

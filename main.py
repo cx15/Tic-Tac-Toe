@@ -47,9 +47,10 @@ def modifyArray(num,turn):
     # num goes from 1 to 9
     # The row number is num / 3
     # The col number is the "remainder when we divide by 3"
-    row = (num - 1) / 3
+    row = (num - 1) // 3
     col = (num - 1) % 3
     Board[row][col] = turn
+
 
 # Define function to check for a winner
 def checkForWinner(Board):
