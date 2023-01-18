@@ -60,18 +60,11 @@ def check_for_winner(board):
   Returns "X", "O", or "N" depending on who has won.
   """
   # X axis
-  if(board[0][0] == 'X' and board[0][1] == 'X' and board[0][2] == 'X'):
-    return "X"
-  elif(board[0][0] == 'O' and board[0][1] == 'O' and board[0][2] == 'O'):
-    return "O"
-  elif(board[1][0] == 'X' and board[1][1] == 'X' and board[1][2] == 'X'):
-    return "X"
-  elif(board[1][0] == 'O' and board[1][1] == 'O' and board[1][2] == 'O'):
-    return "O"
-  elif(board[2][0] == 'X' and board[2][1] == 'X' and board[2][2] == 'X'):
-    return "X"
-  elif(board[2][0] == 'O' and board[2][1] == 'O' and board[2][2] == 'O'):
-    return "O"
+  for row in range(0, 3):
+    symbol = board[row][0]
+    if (symbol in ['X', 'O'] and board[row][1] == symbol
+        and board[row][2] == symbol):
+      return symbol
   # Y axis
   if(board[0][0] == 'X' and board[1][0] == 'X' and board[2][0] == 'X'):
     return "X"
