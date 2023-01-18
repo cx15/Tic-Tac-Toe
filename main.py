@@ -54,6 +54,11 @@ def modifyArray(num,turn):
 
 # Define function to check for a winner
 def checkForWinner(Board):
+  """Returns the winner, if any.
+
+  :param Board - a 3X3 array of "X", "O" or ""
+  Returns "X", "O", or "N" depending on who has won.
+  """
   # X axis
   if(Board[0][0] == 'X' and Board[0][1] == 'X' and Board[0][2] == 'X'):
     print("X has won!")
