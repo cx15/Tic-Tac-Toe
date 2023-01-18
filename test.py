@@ -33,6 +33,15 @@ class BasicFunctionTests(u.TestCase):
         # Returns "X", "O" or "N"
         self.assertEqual("N", result)
 
+        board_O_wins = [["X", "",  "X"],
+                        ["O", "X", "O"],
+                        ["O", "O", "O"]]
+
+        result = main.checkForWinner(board_O_wins)
+        # Returns "X", "O" or "N"
+        self.assertEqual("O", result)
+        
+
 
 
 
