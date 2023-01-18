@@ -15,10 +15,25 @@ class BasicFunctionTests(u.TestCase):
         self.assertEqual(main.Board[2][1], "O", "Last row, 2nd element should be O")
         
    
-      def test_check_for_winner(self):
-      # TODO: write a test to confirm this function does what you expec
-          main.check_for_winner
-      pass
+    def test_check_for_winner(self):
+      # TODO: write a test to confirm this function does what you expect
+        board_x_wins = [["X", "X", "X"],
+                        ["O", "X", "O"],
+                        ["O", "O", ""]]
+
+        result =  main.checkForWinner(board_x_wins)
+        # Returns "X", "O" or "N"
+        self.assertEqual("X", result)
+
+        board_noone_wins = [["X", "",  "X"],
+                            ["O", "X", "O"],
+                            ["O", "O", ""]]
+
+        result = main.checkForWinner(board_noone_wins)
+        # Returns "X", "O" or "N"
+        self.assertEqual("N", result)
+
+
 
 
 
