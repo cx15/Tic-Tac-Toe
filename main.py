@@ -53,63 +53,40 @@ def modifyArray(num,turn):
 
 
 # Define function to check for a winner
-def checkForWinner(Board):
+def check_for_winner(board):
   """Returns the winner, if any.
 
-  :param Board - a 3X3 array of "X", "O" or ""
+  :param board - a 3X3 array of "X", "O" or ""
   Returns "X", "O", or "N" depending on who has won.
   """
   # X axis
-  if(Board[0][0] == 'X' and Board[0][1] == 'X' and Board[0][2] == 'X'):
-    print("X has won!")
-    return "X"
-  elif(Board[0][0] == 'O' and Board[0][1] == 'O' and Board[0][2] == 'O'):
-    print("O has won!")
-    return "O"
-  elif(Board[1][0] == 'X' and Board[1][1] == 'X' and Board[1][2] == 'X'):
-    print("X has won!")
-    return "X"
-  elif(Board[1][0] == 'O' and Board[1][1] == 'O' and Board[1][2] == 'O'):
-    print("O has won!")
-    return "O"
-  elif(Board[2][0] == 'X' and Board[2][1] == 'X' and Board[2][2] == 'X'):
-    print("X has won!")
-    return "X"
-  elif(Board[2][0] == 'O' and Board[2][1] == 'O' and Board[2][2] == 'O'):
-    print("O has won!")
-    return "O"
+  for row in range(0, 3):
+    symbol = board[row][0]
+    if (symbol in ['X', 'O'] and board[row][1] == symbol
+        and board[row][2] == symbol):
+      return symbol
   # Y axis
-  if(Board[0][0] == 'X' and Board[1][0] == 'X' and Board[2][0] == 'X'):
-    print("X has won!")
+  if(board[0][0] == 'X' and board[1][0] == 'X' and board[2][0] == 'X'):
     return "X"
-  elif(Board[0][0] == 'O' and Board[1][0] == 'O' and Board[2][0] == 'O'):
-    print("O has won!")
+  elif(board[0][0] == 'O' and board[1][0] == 'O' and board[2][0] == 'O'):
     return "O"
-  elif(Board[0][1] == 'X' and Board[1][1] == 'X' and Board[2][1] == 'X'):
-    print("X has won!")
+  elif(board[0][1] == 'X' and board[1][1] == 'X' and board[2][1] == 'X'):
     return "X"
-  elif(Board[0][1] == 'O' and Board[1][1] == 'O' and Board[2][1] == 'O'):
-    print("O has won!")
+  elif(board[0][1] == 'O' and board[1][1] == 'O' and board[2][1] == 'O'):
     return "O"
-  elif(Board[0][2] == 'X' and Board[1][2] == 'X' and Board[2][2] == 'X'):
-    print("X has won!")
+  elif(board[0][2] == 'X' and board[1][2] == 'X' and board[2][2] == 'X'):
     return "X"
-  elif(Board[0][2] == 'O' and Board[1][2] == 'O' and Board[2][2] == 'O'):
-    print("O has won!")
+  elif(board[0][2] == 'O' and board[1][2] == 'O' and board[2][2] == 'O'):
     return "O"
   # Cross wins
-  elif(Board[0][0] == 'X' and Board[1][1] == 'X' and Board[2][2] == 'X'):
-    print("X has won!")
+  elif(board[0][0] == 'X' and board[1][1] == 'X' and board[2][2] == 'X'):
     return "X"
-  elif(Board[0][0] == 'O' and Board[1][1] == 'O' and Board[2][2] == 'O'):
-    print("O has won!")  
+  elif(board[0][0] == 'O' and board[1][1] == 'O' and board[2][2] == 'O'):
     return "O"
-  elif(Board[0][2] == 'X' and Board[1][1] == 'X' and Board[2][0] == 'X'):
-    print("X has won!")  
+  elif(board[0][2] == 'X' and board[1][1] == 'X' and board[2][0] == 'X'):
     return "X"
-  elif(Board[0][2] == 'O' and Board[1][1] == 'O' and Board[2][0] == 'O'):
-    print("O has won!") 
-    return "O" 
+  elif(board[0][2] == 'O' and board[1][1] == 'O' and board[2][0] == 'O'):
+    return "O"
   else:
     return "N"
 
@@ -141,7 +118,11 @@ if __name__=="__main__":
                     turnCounter += 1
                     break
 
-        winner = checkForWinner(Board)
-        if(winner != "N"):
+        winner = check_for_winner(Board)
+        if winner == "O":
+          print("O has won!")
+        elif winner == "X":
+          print("X has won!")
+        elif(winner != "N"):
             print("\nGame over! Thank you for playing :)")
             break

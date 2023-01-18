@@ -20,11 +20,11 @@ class BasicFunctionTests(u.TestCase):
                         ["O", "X", "O"],
                         ["O", "O", ""]]
 
-        result =  main.checkForWinner(board_x_wins)
+        result = main.check_for_winner(board_x_wins)
         # Returns "X", "O" or "N"
         self.assertEqual("X", result)
 
-        result = main.checkForWinner(
+        result = main.check_for_winner(
           [board_x_wins[2],
            board_x_wins[0],
            board_x_wins[1]])
@@ -34,7 +34,7 @@ class BasicFunctionTests(u.TestCase):
                             ["O", "X", "O"],
                             ["O", "O", ""]]
 
-        result = main.checkForWinner(board_noone_wins)
+        result = main.check_for_winner(board_noone_wins)
         self.assertEqual("N", result,
                          msg="In this case noone should have won")
 
@@ -42,21 +42,21 @@ class BasicFunctionTests(u.TestCase):
                         ["O", "X", "O"],
                         ["O", "O", "O"]]
 
-        result = main.checkForWinner(board_O_wins)
+        result = main.check_for_winner(board_O_wins)
         self.assertEqual("O", result)
 
         board_O_wins_diag = [["X", "",  "O"],
                              ["O", "O", "O"],
                              ["O", "O", ""]]
 
-        result = main.checkForWinner(board_O_wins_diag)
+        result = main.check_for_winner(board_O_wins_diag)
         self.assertEqual("O", result)
 
         board_X_wins_vert = [["X", "X", ""],
                              ["O", "X", "O"],
                              ["O", "X", ""]]
 
-        result = main.checkForWinner(board_X_wins_vert)
+        result = main.check_for_winner(board_X_wins_vert)
         self.assertEqual("X", result)
 
 
