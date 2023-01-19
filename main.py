@@ -17,9 +17,9 @@ def printGameBoard():
   for a in range(rows):
     print("\n+---+---+---+") 
     print("|", end="")
-    for b in range(colloms):
+  for b in range(colloms):
       print("", Board[a][b], end=" |")
-  print("\n+---+---+---+")
+     print("\n+---+---+---+")
 
 #in charge of how many times the board needs to be modified
 def modifyArray(num,turn):
@@ -65,21 +65,17 @@ def check_for_winner(board):
     if (symbol in ['X', 'O'] and board[row][1] == symbol
         and board[row][2] == symbol):
       return symbol
-  # Y axis
-  if(board[0][0] == 'X' and board[1][0] == 'X' and board[2][0] == 'X'):
-    return "X"
-  elif(board[0][0] == 'O' and board[1][0] == 'O' and board[2][0] == 'O'):
-    return "O"
-  elif(board[0][1] == 'X' and board[1][1] == 'X' and board[2][1] == 'X'):
-    return "X"
-  elif(board[0][1] == 'O' and board[1][1] == 'O' and board[2][1] == 'O'):
-    return "O"
-  elif(board[0][2] == 'X' and board[1][2] == 'X' and board[2][2] == 'X'):
-    return "X"
-  elif(board[0][2] == 'O' and board[1][2] == 'O' and board[2][2] == 'O'):
-    return "O"
+
+  for collom in range(0, 3):
+    symbol = board[0][collom]
+    if (symbol in ['X', 'O'] and board[1][collom] == symbol
+        and board[2][collom] == symbol):
+      return symbol
+
+
+      
   # Cross wins
-  elif(board[0][0] == 'X' and board[1][1] == 'X' and board[2][2] == 'X'):
+  if(board[0][0] == 'X' and board[1][1] == 'X' and board[2][2] == 'X'):
     return "X"
   elif(board[0][0] == 'O' and board[1][1] == 'O' and board[2][2] == 'O'):
     return "O"
@@ -88,7 +84,8 @@ def check_for_winner(board):
   elif(board[0][2] == 'O' and board[1][1] == 'O' and board[2][0] == 'O'):
     return "O"
   else:
-    return "N"
+    return "N if(board[0][0] == 'X' and board[1][0] == 'X' and board[2][0] == 'X'):
+    
 
 leaveLoop = False
 turnCounter = 0
