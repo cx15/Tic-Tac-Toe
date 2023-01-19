@@ -18,8 +18,8 @@ def printGameBoard():
     print("\n+---+---+---+") 
     print("|", end="")
   for b in range(colloms):
-      print("", Board[a][b], end=" |")
-     print("\n+---+---+---+")
+    print("", Board[a][b], end=" |")
+    print("\n+---+---+---+")
 
 #in charge of how many times the board needs to be modified
 def modifyArray(num,turn):
