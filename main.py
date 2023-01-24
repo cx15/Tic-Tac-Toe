@@ -17,9 +17,9 @@ def printGameBoard():
   for a in range(rows):
     print("\n+---+---+---+") 
     print("|", end="")
-  for b in range(colloms):
-    print("", Board[a][b], end=" |")
-    print("\n+---+---+---+")
+    for b in range(colloms):
+      print("", Board[a][b], end=" |")
+  print("\n+---+---+---+")
 
 #in charge of how many times the board needs to be modified
 def modifyArray(num,turn):
@@ -72,8 +72,6 @@ def check_for_winner(board):
         and board[2][collom] == symbol):
       return symbol
 
-
-      
   # Cross wins
   if(board[0][0] == 'X' and board[1][1] == 'X' and board[2][2] == 'X'):
     return "X"
@@ -84,7 +82,7 @@ def check_for_winner(board):
   elif(board[0][2] == 'O' and board[1][1] == 'O' and board[2][0] == 'O'):
     return "O"
   else:
-    return "N if(board[0][0] == 'X' and board[1][0] == 'X' and board[2][0] == 'X'):
+    return "N"
     
 
 leaveLoop = False
