@@ -4,8 +4,17 @@ import main
 
 
 class BasicFunctionTests(u.TestCase):
-    def test_is_true(self):
-        self.assertTrue(True, "Yup, true is true")
+    def test_board_representation(self):
+        golden_board = """
++---+---+---+
+| 1 | 2 | 3 |
++---+---+---+
+| 4 | 5 | 6 |
++---+---+---+
+| 7 | 8 | 9 |
++---+---+---+
+"""
+        self.assertEqual(golden_board, main.board_representation())
 
     def test_modify_array(self):
         main.modifyArray(3, "X")

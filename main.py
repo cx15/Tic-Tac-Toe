@@ -12,14 +12,23 @@ rows = 3
 colloms = 3
 
 #Functions to print out a game board
+def board_representation():
+  representation = ""
+  for a in range(rows):
+    representation += "\n+---+---+---+\n"
+    representation += "|"
+    for b in range(colloms):
+      representation += " "
+      representation += str(Board[a][b])
+      representation += " |"
+  representation += "\n+---+---+---+\n"
+  return representation;
+
+
 
 def printGameBoard():
-  for a in range(rows):
-    print("\n+---+---+---+") 
-    print("|", end="")
-    for b in range(colloms):
-      print("", Board[a][b], end=" |")
-  print("\n+---+---+---+")
+  print(board_representation())
+
 
 #in charge of how many times the board needs to be modified
 def modifyArray(num,turn):
