@@ -82,8 +82,8 @@ def check_for_winner(board):
       return symbol
 
   # Cross wins
-  symbol = board[0][0]
-  if(symbol in ['X', 'O'] and board[1][1] == symbol and board[2][2] == symbol):
+  symbol = board[1][1]
+  if(symbol in ['X', 'O'] and board[0][0] == symbol and board[2][2] == symbol):
     return symbol
   elif(symbol in ['X', 'O'] and board[0][2] == symbol and board[2][0] == symbol):
     return symbol
