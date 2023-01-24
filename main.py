@@ -85,12 +85,9 @@ def check_for_winner(board):
   symbol = board[0][0]
   if(symbol in ['X', 'O'] and board[1][1] == symbol and board[2][2] == symbol):
     return symbol
-  elif(board[0][2] == 'X' and board[1][1] == 'X' and board[2][0] == 'X'):
-    return "X"
-  elif(board[0][2] == 'O' and board[1][1] == 'O' and board[2][0] == 'O'):
-    return "O"
-  else:
-    return "N"
+  elif(symbol in ['X', 'O'] and board[0][2] == symbol and board[2][0] == symbol):
+    return symbol
+ 
     
 
 leaveLoop = False
