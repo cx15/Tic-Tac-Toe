@@ -1,6 +1,12 @@
 import random
 
-
+# TODOs
+# We will:
+# 1) Make the game work
+# 2) Make it possible to do PvP, PvC, or CvC
+# 3) Make it possible to swap in better computer players
+# 4) Replace the text interface with a graphical interface.
+# 5) Maybe? See if we can get the computer to *learn*.
 
 #variables to operate the structure of the games
 
@@ -90,7 +96,7 @@ def check_for_winner(board):
  
     
 
-leaveLoop = False
+leaveLoop = False  # TODO(ahmed): are you using this?
 turnCounter = 0
 
 if __name__=="__main__":

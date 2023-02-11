@@ -69,6 +69,28 @@ class BasicFunctionTests(u.TestCase):
         self.assertEqual("X", result)
 
 
+    def test_check_for_gameover(self):
+      """Calls check_for_winner when the board is full"""
+      # TODO(ahmed): implement this test and fix
+      # check_for_winner so that it passes
+      pass
+
+
+    def test_cpu_choice(self):
+      # TODO(ahmed): Refactor your code so that
+      # the computer's choice comes from a function
+      # instead of being inside the main loop.
+      # Add a simple test for it.
+      pass
+
+
+    def test_player_choice(self):
+      # TODO(ahmed): Refactor your code so that
+      # the human's choice comes from a function.
+      pass
+
+
+
         
 
 
