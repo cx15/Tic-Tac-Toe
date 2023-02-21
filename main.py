@@ -102,7 +102,15 @@ def playerTurn():
     possibleNumbers.remove(numberPicked)
   else:
     print("Invalid input. Please try again.")
-  
+
+def cpuTurn():
+  cpuChoice = random.choice(possibleNumbers)
+  print("\nCpu choice: ", cpuChoice)
+  if(cpuChoice in possibleNumbers):
+    modifyArray(cpuChoice, 'O')
+    possibleNumbers.remove(cpuChoice)
+
+
     
 
 leaveLoop = False  # TODO(ahmed): are you using this?
@@ -112,20 +120,15 @@ if __name__=="__main__":
     print("welcome to Tic Tac Toe")
     print("----------------------")
     while(leaveLoop == False):
-        #the player's turn
-        if(turnCounter % 2 == 0):
-          playerTurn
-          turnCounter += 1
-        #the computer's turn
-        else:
-            while(True):
-                cpuChoice = random.choice(possibleNumbers)
-                print("\nCpu choice: ", cpuChoice)
-                if(cpuChoice in possibleNumbers):
-                    modifyArray(cpuChoice, 'O')
-                    possibleNumbers.remove(cpuChoice)
-                    turnCounter += 1
-                    break
+      #the player's turn
+      if(turnCounter % 2 == 0):
+        playerTurn
+        turnCounter += 1
+      #the computer's turn
+      while(True):
+        cpuTurn
+        turnCounter += 1
+        break
 
         winner = check_for_winner(Board)
         if winner == "O":
