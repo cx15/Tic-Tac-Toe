@@ -93,7 +93,16 @@ def check_for_winner(board):
     return symbol
   elif(symbol in ['X', 'O'] and board[0][2] == symbol and board[2][0] == symbol):
     return symbol
- 
+
+def playerTurn():
+  printGameBoard()
+  numberPicked = int(input("\nChoose a number [1-9]: "))
+  if(numberPicked >= 1 or numberPicked <= 9):
+    modifyArray(numberPicked, 'X')
+    possibleNumbers.remove(numberPicked)
+  else:
+    print("Invalid input. Please try again.")
+  
     
 
 leaveLoop = False  # TODO(ahmed): are you using this?
@@ -105,14 +114,8 @@ if __name__=="__main__":
     while(leaveLoop == False):
         #the player's turn
         if(turnCounter % 2 == 0):
-            printGameBoard()
-            numberPicked = int(input("\nChoose a number [1-9]: "))
-            if(numberPicked >= 1 or numberPicked <= 9):
-                modifyArray(numberPicked, 'X')
-                possibleNumbers.remove(numberPicked)
-            else:
-                print("Invalid input. Please try again.")
-                turnCounter += 1
+          playerTurn
+          turnCounter += 1
         #the computer's turn
         else:
             while(True):
