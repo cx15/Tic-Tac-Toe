@@ -72,7 +72,8 @@ def check_for_winner(board):
   """Returns the winner, if any.
 
   :param board - a 3X3 array of "X", "O" or ""
-  Returns "X", "O", or "N" depending on who has won.
+  Returns "X", "O" depending on who has won or "N" if it's a
+  tie or "None" otherwise.
   """
   # X axis
   for row in range(0, 3):
@@ -94,6 +95,8 @@ def check_for_winner(board):
   elif(symbol in ['X', 'O'] and board[0][2] == symbol and board[2][0] == symbol):
     return symbol
 
+
+
 def playerTurn():
   printGameBoard()
   numberPicked = int(input("\nChoose a number [1-9]: "))
@@ -111,30 +114,28 @@ def cpuTurn():
     possibleNumbers.remove(cpuChoice)
 
 
-    
-
-leaveLoop = False  # TODO(ahmed): are you using this?
+leave_loop = False  # TODO(ahmed): are you using this?
 turnCounter = 0
 
-if __name__=="__main__":
+if __name__ == "__main__":
     print("welcome to Tic Tac Toe")
     print("----------------------")
-    while(leaveLoop == False):
+    while not leave_loop:
       #the player's turn
       if(turnCounter % 2 == 0):
-        playerTurn
-        turnCounter += 1
-      #the computer's turn
-      while(True):
-        cpuTurn
-        turnCounter += 1
-        break
+        playerTurn()
+      else:
+        #the computer's turn
+        cpuTurn()
 
-        winner = check_for_winner(Board)
-        if winner == "O":
-          print("O has won!")
-        elif winner == "X":
-          print("X has won!")
-        elif(winner != "N"):
-            print("\nGame over! Thank you for playing :)")
-            break
+      turnCounter += 1
+
+      winner = check_for_winner(Board)
+      print(winner)
+      if winner == "O":
+        print("O has won!")
+      elif winner == "X":
+        print("X has won!")
+      elif(winner != "N"):
+          print("\nGame over! Thank you for playing :)")
+          break

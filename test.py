@@ -44,7 +44,7 @@ class BasicFunctionTests(u.TestCase):
                             ["O", "O", ""]]
 
         result = main.check_for_winner(board_noone_wins)
-        self.assertEqual("N", result,
+        self.assertEqual(None, result,
                          msg="In this case noone should have won")
 
         board_O_wins = [["X", "",  "X"],
@@ -71,9 +71,11 @@ class BasicFunctionTests(u.TestCase):
 
     def test_check_for_gameover(self):
       """Calls check_for_winner when the board is full"""
-      # TODO(ahmed): implement this test and fix
-      # check_for_winner so that it passes
-      pass
+      board_game_over = [["X", "X", "O"],
+                         ["O", "X", "X"],
+                         ["X", "O", "O"]]
+      result = main.check_for_winner(board_game_over)
+      self.assertEqual("N", result)
 
 
     def test_cpu_choice(self):
