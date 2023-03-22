@@ -10,7 +10,7 @@ import random
 
 #variables to operate the structure of the games
 
-possibleNumbers = [1,2,3,4,5,6,7,8,9]
+possibleNumbers = {1,2,3,4,5,6,7,8,9}
 
 
 Board =  [[1,2,3], [4,5,6], [7,8,9]]
@@ -98,8 +98,8 @@ def check_for_winner(board):
     return symbol
 
   # board is full
-  for row in range(0,3):
-    for collom in range(0,3):
+  for row in range(0, 3):
+    for collom in range(0,3 ):
       symbol = board[row][collom]
       if not symbol:
         return None
@@ -107,15 +107,18 @@ def check_for_winner(board):
 
 def playerTurn():
   printGameBoard()
-  numberPicked = int(input("\nChoose a number [1-9]: "))
-  if(numberPicked >= 1 or numberPicked <= 9):
-    modifyArray(numberPicked, 'X')
-    possibleNumbers.remove(numberPicked)
-  else:
-    print("Invalid input. Please try again.")
+  while True:
+    number_picked = int(input("\nChoose a number [1-9]: "))
+    if (number_picked >= 1 and number_picked <= 9 and
+          number_picked in possibleNumbers):
+      modifyArray(number_picked, 'X')
+      possibleNumbers.remove(number_picked)
+      return
+    else:
+      print("Invalid input. Please try again.")
 
 def cpuTurn():
-  cpuChoice = random.choice(possibleNumbers)
+  cpuChoice = random.choice(list(possibleNumbers))
   print("\nCpu choice: ", cpuChoice)
   if(cpuChoice in possibleNumbers):
     modifyArray(cpuChoice, 'O')
