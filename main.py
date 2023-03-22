@@ -30,6 +30,7 @@ def board_representation():
   representation += "\n+---+---+---+\n"
   return representation;
 
+  # Check to see if nobody won and the board is full.
 
 
 def printGameBoard():
@@ -75,13 +76,14 @@ def check_for_winner(board):
   Returns "X", "O" depending on who has won or "N" if it's a
   tie or "None" otherwise.
   """
-  # X axis
+  # Check to see if there's a complete row
   for row in range(0, 3):
     symbol = board[row][0]
     if (symbol in ['X', 'O'] and board[row][1] == symbol
         and board[row][2] == symbol):
       return symbol
 
+  # Check to see if there's a complete column
   for collom in range(0, 3):
     symbol = board[0][collom]
     if (symbol in ['X', 'O'] and board[1][collom] == symbol
@@ -94,11 +96,12 @@ def check_for_winner(board):
     return symbol
   elif(symbol in ['X', 'O'] and board[0][2] == symbol and board[2][0] == symbol):
     return symbol
+
   # board is full
   for row in range(0,3):
     for collom in range(0,3):
       symbol = board[row][collom]
-      if symbol == "":
+      if not symbol:
         return None
   return "N"
 
@@ -136,7 +139,6 @@ if __name__ == "__main__":
       turnCounter += 1
 
       winner = check_for_winner(Board)
-      print(winner)
       if winner == "O":
         print("O has won!")
         leave_loop = True
@@ -144,6 +146,8 @@ if __name__ == "__main__":
         print("X has won!")
         leave_loop = True
       elif(winner != "N"):
-        leave_loop =  True
+        leave_loop = True
         print("\nGame over! Thank you for playing :)")
+
+      printGameBoard()
 
