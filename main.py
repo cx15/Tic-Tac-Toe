@@ -94,8 +94,13 @@ def check_for_winner(board):
     return symbol
   elif(symbol in ['X', 'O'] and board[0][2] == symbol and board[2][0] == symbol):
     return symbol
-
-
+  # board is full
+  for row in range(0,3):
+    for collom in range(0,3):
+      symbol = board[row][collom]
+      if symbol == "":
+        return None
+  return "N"
 
 def playerTurn():
   printGameBoard()
@@ -134,8 +139,11 @@ if __name__ == "__main__":
       print(winner)
       if winner == "O":
         print("O has won!")
+        leave_loop = True
       elif winner == "X":
         print("X has won!")
+        leave_loop = True
       elif(winner != "N"):
-          print("\nGame over! Thank you for playing :)")
-          break
+        leave_loop =  True
+        print("\nGame over! Thank you for playing :)")
+
