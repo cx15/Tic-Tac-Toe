@@ -99,9 +99,10 @@ def check_for_winner(board):
 
   # board is full
   for row in range(0, 3):
-    for collom in range(0,3 ):
+    for collom in range(0, 3):
       symbol = board[row][collom]
-      if not symbol:
+      # print(f"Symbol: {symbol}")
+      if symbol not in ['X', 'O']:
         return None
   return "N"
 
@@ -148,7 +149,7 @@ if __name__ == "__main__":
       elif winner == "X":
         print("X has won!")
         leave_loop = True
-      elif(winner != "N"):
+      elif(winner == "N"):
         leave_loop = True
         print("\nGame over! Thank you for playing :)")
 
