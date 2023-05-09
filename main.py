@@ -118,7 +118,37 @@ def playerTurn():
     else:
       print("Invalid input. Please try again.")
 
-def cpuTurn():
+
+class Wheel:
+  """Represents a wheel"""
+  def go(self):
+    print("Wheel goes round")
+
+class Engine:
+  """Represents and engine"""
+
+  def go(self):
+    print("Engine goes vroom")
+
+class Car:
+  """This represents a car"""
+  wheel1 = Wheel()
+  wheel2 = Wheel()
+  engine = Engine()
+  def go(self):
+    wheel1.go()
+    wheel2.go()
+    engine.go()
+
+
+def cpuTurnRandom():
+  cpuChoice = random.choice(list(possibleNumbers))
+  print("\nCpu choice: ", cpuChoice)
+  if(cpuChoice in possibleNumbers):
+    modifyArray(cpuChoice, 'O')
+    possibleNumbers.remove(cpuChoice)
+
+def cpuTurnBetter():
   cpuChoice = random.choice(list(possibleNumbers))
   print("\nCpu choice: ", cpuChoice)
   if(cpuChoice in possibleNumbers):
