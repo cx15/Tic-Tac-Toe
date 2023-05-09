@@ -60,7 +60,7 @@ if skillLevel < 5:
   cpuStrat = CpuRandomStrategy()
 elif skillLevel < 10:
   cpuStrat = CpuSmartStrategy()
-else
+else:
   cpuStrat = CpuAIStrategy()
 
 cpuStrat.makeMove()
