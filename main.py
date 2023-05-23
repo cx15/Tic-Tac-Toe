@@ -1,4 +1,5 @@
-import random
+import board
+import strategies
 
 # TODOs
 # We will:
@@ -10,22 +11,17 @@ import random
 
 #variables to operate the structure of the games
 
-possibleNumbers = {1,2,3,4,5,6,7,8,9}
 
-
-Board =  [[1,2,3], [4,5,6], [7,8,9]]
-rows = 3
-colloms = 3
 
 #Functions to print out a game board
 def board_representation():
   representation = ""
-  for a in range(rows):
+  for a in range(board.rows):
     representation += "\n+---+---+---+\n"
     representation += "|"
-    for b in range(colloms):
+    for b in range(board.colloms):
       representation += " "
-      representation += str(Board[a][b])
+      representation += str(board.Board[a][b])
       representation += " |"
   representation += "\n+---+---+---+\n"
   return representation;
@@ -35,37 +31,6 @@ def board_representation():
 
 def printGameBoard():
   print(board_representation())
-
-
-#in charge of how many times the board needs to be modified
-def modifyArray(num,turn):
-    """
-  num -= 1
-  if(num == 0):
-    Board[0][0] = turn
-  elif(num == 1):
-    Board[0][1] = turn
-  elif(num == 2):
-    Board[0][2] = turn
-  elif(num == 3):
-    Board[1][0] = turn
-  elif(num == 4):
-    Board[1][1] = turn
-  elif(num == 5):
-    Board[1][2] = turn
-  elif(num == 6):
-    Board[2][0] = turn
-  elif(num == 7):
-    Board[2][1] = turn
-  elif(num == 8):
-    Board[2][2] = turn
-    """
-    # num goes from 1 to 9
-    # The row number is num / 3
-    # The col number is the "remainder when we divide by 3"
-    row = (num - 1) // 3
-    col = (num - 1) % 3
-    Board[row][col] = turn
 
 
 # Define function to check for a winner
@@ -111,52 +76,15 @@ def playerTurn():
   while True:
     number_picked = int(input("\nChoose a number [1-9]: "))
     if (number_picked >= 1 and number_picked <= 9 and
-          number_picked in possibleNumbers):
-      modifyArray(number_picked, 'X')
-      possibleNumbers.remove(number_picked)
+          number_picked in board.possibleNumbers):
+      board.modifyArray(number_picked, 'X')
+      board.possibleNumbers.remove(number_picked)
       return
     else:
       print("Invalid input. Please try again.")
 
 
-class Wheel:
-  """Represents a wheel"""
-  def go(self):
-    print("Wheel goes round")
-
-class Engine:
-  """Represents and engine"""
-
-  def go(self):
-    print("Engine goes vroom")
-
-class Car:
-  """This represents a car"""
-  wheel1 = Wheel()
-  wheel2 = Wheel()
-  engine = Engine()
-  def go(self):
-    wheel1.go()
-    wheel2.go()
-    engine.go()
-
-
-def cpuTurnRandom():
-  cpuChoice = random.choice(list(possibleNumbers))
-  print("\nCpu choice: ", cpuChoice)
-  if(cpuChoice in possibleNumbers):
-    modifyArray(cpuChoice, 'O')
-    possibleNumbers.remove(cpuChoice)
-
-def cpuTurnBetter():
-  cpuChoice = random.choice(list(possibleNumbers))
-  print("\nCpu choice: ", cpuChoice)
-  if(cpuChoice in possibleNumbers):
-    modifyArray(cpuChoice, 'O')
-    possibleNumbers.remove(cpuChoice)
-
-
-leave_loop = False  # TODO(ahmed): are you using this?
+leave_loop = False
 turnCounter = 0
 
 if __name__ == "__main__":
@@ -168,18 +96,18 @@ if __name__ == "__main__":
         playerTurn()
       else:
         #the computer's turn
-        cpuTurn()
+        strategies.cpu_turn_random()
 
       turnCounter += 1
 
-      winner = check_for_winner(Board)
+      winner = check_for_winner(board.Board)
       if winner == "O":
         print("O has won!")
         leave_loop = True
       elif winner == "X":
         print("X has won!")
         leave_loop = True
-      elif(winner == "N"):
+      elif winner == "N":
         leave_loop = True
         print("\nGame over! Thank you for playing :)")
 

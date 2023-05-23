@@ -5,6 +5,7 @@ These are the tests for Tic Tac Toe
 
 import unittest as u
 
+import board
 import main
 
 
@@ -22,11 +23,11 @@ class BasicFunctionTests(u.TestCase):
         self.assertEqual(golden_board, main.board_representation())
 
     def test_modify_array(self):
-        main.modifyArray(3, "X")
-        self.assertEqual(main.Board[0][2], "X", "First row, 3 element should be X")
+        board.modifyArray(3, "X")
+        self.assertEqual(board.Board[0][2], "X", "First row, 3 element should be X")
 
-        main.modifyArray(8, "O")
-        self.assertEqual(main.Board[2][1], "O", "Last row, 2nd element should be O")
+        board.modifyArray(8, "O")
+        self.assertEqual(board.Board[2][1], "O", "Last row, 2nd element should be O")
         
    
     def test_check_for_winner(self):
