@@ -40,7 +40,17 @@ class CpuBetterStrategy(Strategy):
         return empty_col_index
 
     # Now do the same for a winning column.
-
+    for col in range(0, 3):
+      symbol_count = 0
+      empty_col_index = None
+      for row in range(0, 3):
+        if board[row][col] == symbol:
+          symbol_count += 1
+        elif board[row][col] in range(0, 10):
+          empty_col_index = board[row][col]
+      if symbol_count == 2:
+        # We have a winning move!
+        return empty_col_index
 
 
 
