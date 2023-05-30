@@ -8,7 +8,7 @@ import random
 # 4) Replace the text interface with a graphical interface.
 # 5) Maybe? See if we can get the computer to *learn*.
 
-# variables to operate the structure of the games
+# variables to operate the structure of the game
 
 possibleNumbers = {1, 2, 3, 4, 5, 6, 7, 8, 9}
 
@@ -19,19 +19,18 @@ colloms = 3
 
 # Functions to print out a game board
 def board_representation():
-  representation = ""
-  for a in range(board.rows):
+    representation = ""
+    for a in range(rows):
+        representation += "\n+---+---+---+\n"
+        representation += "|"
+        for b in range(colloms):
+            representation += " "
+            representation += str(Board[a][b])
+            representation += " |"
     representation += "\n+---+---+---+\n"
-    representation += "|"
-    for b in range(board.colloms):
-      representation += " "
-      representation += str(board.Board[a][b])
-      representation += " |"
-  representation += "\n+---+---+---+\n"
-  return representation;
+    return representation;
 
-
-# Check to see if nobody won and the board is full.
+    # Check to see if nobody won and the board is full.
 
 
 def printGameBoard():
@@ -121,7 +120,45 @@ def playerTurn():
             print("Invalid input. Please try again.")
 
 
-leave_loop = False  # TODO(ahmed): are you using this?
+"""class Wheel:
+  Represents a wheel
+  def go(self):
+    print("Wheel goes round")
+
+class Engine:
+  Represents and engine
+
+  def go(self):
+    print("Engine goes vroom")
+
+class Car:
+  This represents a car
+  wheel1 = Wheel()
+  wheel2 = Wheel()
+  engine = Engine()
+  def go(self):
+    wheel1.go()
+    wheel2.go()
+    engine.go()"""
+
+
+def cpuTurnRandom():
+    cpuChoice = random.choice(list(possibleNumbers))
+    print("\nCpu choice: ", cpuChoice)
+    if (cpuChoice in possibleNumbers):
+        modifyArray(cpuChoice, 'O')
+        possibleNumbers.remove(cpuChoice)
+
+
+def cpuTurnBetter():
+    cpuChoice = random.choice(list(possibleNumbers))
+    print("\nCpu choice: ", cpuChoice)
+    if (cpuChoice in possibleNumbers):
+        modifyArray(cpuChoice, 'O')
+        possibleNumbers.remove(cpuChoice)
+
+
+leave_loop = False
 turnCounter = 0
 
 if __name__ == "__main__":
@@ -133,7 +170,7 @@ if __name__ == "__main__":
             playerTurn()
         else:
             # the computer's turn
-            cpuTurn()
+            cpuTurnBetter()
 
         turnCounter += 1
 
