@@ -87,16 +87,20 @@ def playerTurn():
 leave_loop = False
 turnCounter = 0
 
+
 if __name__ == "__main__":
     print("welcome to Tic Tac Toe")
     print("----------------------")
+
+    our_strategy = strategies.CpuRandomStrategy()
+
     while not leave_loop:
-      #the player's turn
+      # the player's turn
       if(turnCounter % 2 == 0):
         playerTurn()
       else:
-        #the computer's turn
-        strategies.cpu_turn_random()
+        # the computer's turn
+        our_strategy.make_turn()
 
       turnCounter += 1
 
