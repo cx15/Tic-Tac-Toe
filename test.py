@@ -7,6 +7,7 @@ import unittest as u
 
 import board
 import main
+import strategies
 
 
 class BasicFunctionTests(u.TestCase):
@@ -98,8 +99,21 @@ class BasicFunctionTests(u.TestCase):
       pass
 
 
+    def test_CpuBetterStrategy_finds_winning_move_row(self):
+      strategy = strategies.CpuBetterStrategy()
+      myboard = board.Board
+      myboard[0][0] = "X"
+      myboard[0][1] = "X"
+      self.assertEqual(2, strategy.check_for_winning_move("X"))
+      self.assertEqual(None, strategy.check_for_winning_move("O"))
 
-        
+    def test_CpuBetterStrategy_finds_winning_move_col(self):
+      strategy = strategies.CpuBetterStrategy()
+      myboard = board.Board
+      myboard[0][1] = "O"
+      myboard[2][1] = "O"
+      self.assertEqual(None, strategy.check_for_winning_move("X"))
+      self.assertEqual(4, strategy.check_for_winning_move("O"))
 
 
 
