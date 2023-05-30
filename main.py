@@ -92,7 +92,7 @@ if __name__ == "__main__":
     print("welcome to Tic Tac Toe")
     print("----------------------")
 
-    our_strategy = strategies.CpuRandomStrategy()
+    our_strategy = strategies.CpuBetterStrategy()
 
     while not leave_loop:
       # the player's turn

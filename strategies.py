@@ -34,7 +34,7 @@ class CpuBetterStrategy(Strategy):
         if board.Board[row][col] == symbol:
           symbol_count += 1
         elif board.Board[row][col] in range(0, 10):
-          empty_col_index = board[row][col]
+          empty_col_index = board.Board[row][col]
       if symbol_count == 2:
         # We have a winning move!
         return empty_col_index
@@ -44,17 +44,19 @@ class CpuBetterStrategy(Strategy):
       symbol_count = 0
       empty_col_index = None
       for row in range(0, 3):
-        if board[row][col] == symbol:
+        if board.Board[row][col] == symbol:
           symbol_count += 1
-        elif board[row][col] in range(0, 10):
-          empty_col_index = board[row][col]
+        elif board.Board[row][col] in range(0, 10):
+          empty_col_index = board.Board[row][col]
       if symbol_count == 2:
         # We have a winning move!
         return empty_col_index
 
+    # TODO(Ahmed): Implement the diagonal check.
+    return None
 
 
-
+    """
     # Cross wins
     symbol = board[1][1]
     if (symbol in ['X', 'O'] and board[0][0] == symbol and board[2][
@@ -72,12 +74,19 @@ class CpuBetterStrategy(Strategy):
         if symbol not in ['X', 'O']:
           return None
     return "N"
-
-
+    """
 
   def make_turn(self):
-    # TODO: Update this
     cpu_choice = random.choice(list(board.possibleNumbers))
+    # Check for a winning move
+    winning_move = self.check_for_winning_move("O")
+    if winning_move:
+      print("We spotted a winning move!")
+      cpu_choice = winning_move
+
+    # TODO(Ahmed): if there's no winning move - check to see if you can
+    # block the human.
+
     print("\nCpu choice: ", cpu_choice)
     if cpu_choice in board.possibleNumbers:
       board.modifyArray(cpu_choice, 'O')

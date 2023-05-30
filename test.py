@@ -21,6 +21,8 @@ class BasicFunctionTests(u.TestCase):
 | 7 | 8 | 9 |
 +---+---+---+
 """
+        # TODO Remove this once board has been refactored
+        board.Board = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
         self.assertEqual(golden_board, main.board_representation())
 
     def test_modify_array(self):
@@ -104,7 +106,7 @@ class BasicFunctionTests(u.TestCase):
       myboard = board.Board
       myboard[0][0] = "X"
       myboard[0][1] = "X"
-      self.assertEqual(2, strategy.check_for_winning_move("X"))
+      self.assertEqual(3, strategy.check_for_winning_move("X"))
       self.assertEqual(None, strategy.check_for_winning_move("O"))
 
     def test_CpuBetterStrategy_finds_winning_move_col(self):
@@ -113,7 +115,7 @@ class BasicFunctionTests(u.TestCase):
       myboard[0][1] = "O"
       myboard[2][1] = "O"
       self.assertEqual(None, strategy.check_for_winning_move("X"))
-      self.assertEqual(4, strategy.check_for_winning_move("O"))
+      self.assertEqual(5, strategy.check_for_winning_move("O"))
 
 
 
