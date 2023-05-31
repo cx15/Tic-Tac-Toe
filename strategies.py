@@ -9,11 +9,11 @@ class Strategy:
 
 class CpuRandomStrategy(Strategy):
   def make_turn(self):
-    cpu_choice = random.choice(list(board.possibleNumbers))
+    cpu_choice = random.choice(list(board.POSSIBLE_NUMBERS))
     print("\nCpu choice: ", cpu_choice)
-    if cpu_choice in board.possibleNumbers:
-      board.modifyArray(cpu_choice, 'O')
-      board.possibleNumbers.remove(cpu_choice)
+    if cpu_choice in board.POSSIBLE_NUMBERS:
+      board.modify_array(cpu_choice, 'O')
+      board.POSSIBLE_NUMBERS.remove(cpu_choice)
 
 
 class CpuBetterStrategy(Strategy):
@@ -31,10 +31,10 @@ class CpuBetterStrategy(Strategy):
       symbol_count = 0
       empty_col_index = None
       for col in range(0, 3):
-        if board.Board[row][col] == symbol:
+        if board.board[row][col] == symbol:
           symbol_count += 1
-        elif board.Board[row][col] in range(0, 10):
-          empty_col_index = board.Board[row][col]
+        elif board.board[row][col] in range(0, 10):
+          empty_col_index = board.board[row][col]
       if symbol_count == 2:
         # We have a winning move!
         return empty_col_index
@@ -44,10 +44,10 @@ class CpuBetterStrategy(Strategy):
       symbol_count = 0
       empty_col_index = None
       for row in range(0, 3):
-        if board.Board[row][col] == symbol:
+        if board.board[row][col] == symbol:
           symbol_count += 1
-        elif board.Board[row][col] in range(0, 10):
-          empty_col_index = board.Board[row][col]
+        elif board.board[row][col] in range(0, 10):
+          empty_col_index = board.board[row][col]
       if symbol_count == 2:
         # We have a winning move!
         return empty_col_index
@@ -77,7 +77,7 @@ class CpuBetterStrategy(Strategy):
     """
 
   def make_turn(self):
-    cpu_choice = random.choice(list(board.possibleNumbers))
+    cpu_choice = random.choice(list(board.POSSIBLE_NUMBERS))
     # Check for a winning move
     winning_move = self.check_for_winning_move("O")
     if winning_move:
@@ -88,6 +88,6 @@ class CpuBetterStrategy(Strategy):
     # block the human.
 
     print("\nCpu choice: ", cpu_choice)
-    if cpu_choice in board.possibleNumbers:
-      board.modifyArray(cpu_choice, 'O')
-      board.possibleNumbers.remove(cpu_choice)
+    if cpu_choice in board.POSSIBLE_NUMBERS:
+      board.modify_array(cpu_choice, 'O')
+      board.POSSIBLE_NUMBERS.remove(cpu_choice)

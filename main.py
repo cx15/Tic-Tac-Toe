@@ -12,16 +12,15 @@ import strategies
 #variables to operate the structure of the games
 
 
-
 #Functions to print out a game board
 def board_representation():
   representation = ""
-  for a in range(board.rows):
+  for a in range(board.ROWS):
     representation += "\n+---+---+---+\n"
     representation += "|"
-    for b in range(board.colloms):
+    for b in range(board.COLS):
       representation += " "
-      representation += str(board.Board[a][b])
+      representation += str(board.board[a][b])
       representation += " |"
   representation += "\n+---+---+---+\n"
   return representation;
@@ -29,63 +28,66 @@ def board_representation():
   # Check to see if nobody won and the board is full.
 
 
-def printGameBoard():
+def print_game_board():
   print(board_representation())
 
 
 # Define function to check for a winner
-def check_for_winner(board):
+def check_for_winner(the_board):
   """Returns the winner, if any.
 
-  :param board - a 3X3 array of "X", "O" or ""
+  :param the_board - a 3X3 array of "X", "O" or ""
   Returns "X", "O" depending on who has won or "N" if it's a
   tie or "None" otherwise.
   """
   # Check to see if there's a complete row
   for row in range(0, 3):
-    symbol = board[row][0]
-    if (symbol in ['X', 'O'] and board[row][1] == symbol
-        and board[row][2] == symbol):
+    symbol = the_board[row][0]
+    if (symbol in ['X', 'O'] and the_board[row][1] == symbol
+        and the_board[row][2] == symbol):
       return symbol
 
   # Check to see if there's a complete column
-  for collom in range(0, 3):
-    symbol = board[0][collom]
-    if (symbol in ['X', 'O'] and board[1][collom] == symbol
-        and board[2][collom] == symbol):
+  for col in range(0, 3):
+    symbol = the_board[0][col]
+    if (symbol in ['X', 'O'] and the_board[1][col] == symbol
+        and the_board[2][col] == symbol):
       return symbol
 
   # Cross wins
-  symbol = board[1][1]
-  if(symbol in ['X', 'O'] and board[0][0] == symbol and board[2][2] == symbol):
+  symbol = the_board[1][1]
+  if (symbol in ['X', 'O'] and the_board[0][0] == symbol and
+        the_board[2][2] == symbol):
     return symbol
-  elif(symbol in ['X', 'O'] and board[0][2] == symbol and board[2][0] == symbol):
+  elif (symbol in ['X', 'O'] and the_board[0][2] == symbol and
+        the_board[2][0] == symbol):
     return symbol
 
   # board is full
   for row in range(0, 3):
-    for collom in range(0, 3):
-      symbol = board[row][collom]
+    for col in range(0, 3):
+      symbol = the_board[row][col]
       # print(f"Symbol: {symbol}")
       if symbol not in ['X', 'O']:
         return None
   return "N"
 
-def playerTurn():
-  printGameBoard()
+
+def player_turn():
+  print_game_board()
   while True:
     number_picked = int(input("\nChoose a number [1-9]: "))
-    if (number_picked >= 1 and number_picked <= 9 and
-          number_picked in board.possibleNumbers):
-      board.modifyArray(number_picked, 'X')
-      board.possibleNumbers.remove(number_picked)
+    if (1 <= number_picked <= 9 and
+          number_picked in board.POSSIBLE_NUMBERS):
+      board.modify_array(number_picked, 'X')
+      board.POSSIBLE_NUMBERS.remove(number_picked)
       return
     else:
       print("Invalid input. Please try again.")
 
 
 leave_loop = False
-turnCounter = 0
+turn_counter = 0
 
 
 if __name__ == "__main__":
@@ -96,15 +98,15 @@ if __name__ == "__main__":
 
     while not leave_loop:
       # the player's turn
-      if(turnCounter % 2 == 0):
-        playerTurn()
+      if(turn_counter % 2 == 0):
+        player_turn()
       else:
         # the computer's turn
         our_strategy.make_turn()
 
-      turnCounter += 1
+      turn_counter += 1
 
-      winner = check_for_winner(board.Board)
+      winner = check_for_winner(board.board)
       if winner == "O":
         print("O has won!")
         leave_loop = True
@@ -115,5 +117,5 @@ if __name__ == "__main__":
         leave_loop = True
         print("\nGame over! Thank you for playing :)")
 
-      printGameBoard()
+      print_game_board()
 
