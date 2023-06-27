@@ -52,30 +52,54 @@ class CpuBetterStrategy(Strategy):
                 # We have a winning move!
                 return empty_col_index
         # (Ahmed): Implement the diagonal check.
-        symbol = board[1][1]
-        if (symbol in ['X', 'O'] and board[0][0] == symbol and board[2][2] == symbol):
+        symbol = board.board[1][1]
+        """
+        What are the possibilities for a diagonal winning move?
+        
+        X 2 3
+        4 X 6
+        7 8 9    --- 9
+        
+        1 2 3
+        4 X 6
+        7 8 X    --- 1
+        
+        X 2 3
+        4 5 6
+        7 8 X    ---5
+        
+        X O 3
+        O X 6
+        7 8 9
+        
+        symbol_count = 0
+        empty_idx = None
+        is_there_a_blocker = False
+        for idx goes from 0 to 2:
+          if board[idx][idx] == symbol
+            symbol_count ++
+          else if
+            board[idx][idx] is a number
+            empty_idx = idx
+          else:
+            is_there_a_blocker = True
+        
+        if symbol_count == 2 and not is_there_a_blocker:
+          return empty_idx
+          
+        return None
+        
+        
+        """
+
+
+
+
+        if (symbol in ['X', 'O'] and board.board[0][0] == symbol and board.board[2][2] == symbol):
           return symbol
-        elif (symbol in ['X', 'O'] and board[0][2] == symbol and board[2][0] == symbol):
+        elif (symbol in ['X', 'O'] and board.board[0][2] == symbol and board.board[2][0] == symbol):
           return symbol
         return None
-
-        """
-    # Cross wins
-    symbol = board[1][1]
-    if (symbol in ['X', 'O'] and board[0][0] == symbol and board[2][2] == symbol):
-      return symbol
-    elif (symbol in ['X', 'O'] and board[0][2] == symbol and board[2][0] == symbol):
-      return symbol
-
-    # board is full
-    for row in range(0, 3):
-      for collom in range(0, 3):
-        symbol = board[row][collom]
-        # print(f"Symbol: {symbol}")
-        if symbol not in ['X', 'O']:
-          return None
-    return "N"
-    """
 
     def make_turn(self):
         cpu_choice = random.choice(list(board.POSSIBLE_NUMBERS))
