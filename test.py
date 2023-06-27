@@ -178,7 +178,9 @@ class BasicFunctionTests(u.TestCase):
 # Then: add the code for the other diagonal.
 # Hint:  as before have idx going 0, 1, 2
 #  The board value you want to test will be: board.board[idx][2 - idx]
-
+# Stretch: currently the code will pick a winning move for the computer if
+# it exists.  Can you modify it so that it will also block a human
+# from winning?
 
 if __name__ == '__main__':
     u.main()
