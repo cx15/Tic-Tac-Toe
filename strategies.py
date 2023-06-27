@@ -51,7 +51,7 @@ class CpuBetterStrategy(Strategy):
             if symbol_count == 2:
                 # We have a winning move!
                 return empty_col_index
-        # TODO(Ahmed): Implement the diagonal check.
+        # (Ahmed): Implement the diagonal check.
         symbol = board[1][1]
         if (symbol in ['X', 'O'] and board[0][0] == symbol and board[2][2] == symbol):
           return symbol
@@ -85,7 +85,7 @@ class CpuBetterStrategy(Strategy):
             print("We spotted a winning move!")
             cpu_choice = winning_move
 
-        # TODO(Ahmed): if there's no winning move - check to see if you can
+        # (Ahmed): if there's no winning move - check to see if you can
         # block the human.
         for row in range(0, 3):
             for col in range(0, 3):
