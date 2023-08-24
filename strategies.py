@@ -51,6 +51,20 @@ class CpuBetterStrategy(Strategy):
             if symbol_count == 2:
                 # We have a winning move!
                 return empty_col_index
+
+        symbol_count = 0
+        empty_col_index = None
+        for idx in range(0, 3):
+            if board.board[idx][idx] == symbol:
+                symbol_count += 1
+            elif board.board[idx][idx] in range(0, 10):
+                empty_col_index = board.board[idx][idx]
+        if symbol_count == 2:
+            # We have a winning move!
+            return empty_col_index
+
+
+
         # (Ahmed): Implement the diagonal check.
         symbol = board.board[1][1]
         """
