@@ -173,8 +173,8 @@ class BasicFunctionTests(u.TestCase):
 
 
 # TODOs:
-# Try removing the special code for is_there_a_blocker
-# Make sure the test still passes
+# Try removing the special code for is_there_a_blocker: Done
+# Make sure the test still passes: Done
 # Then: add the code for the other diagonal.
 # Hint:  as before have idx going 0, 1, 2
 #  The board value you want to test will be: board.board[idx][2 - idx]

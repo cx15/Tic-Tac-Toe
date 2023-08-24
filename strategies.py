@@ -74,23 +74,12 @@ class CpuBetterStrategy(Strategy):
         """
         symbol_count = 0
         empty_idx = None
-        is_there_a_blocker = False
-        for idx in range(0, 3):
-          if board.board[idx][idx] == symbol:
-            symbol_count =+ 1
-          elif isinstance(board.board[idx][idx], int):
-            empty_idx = idx
-          else:
-            is_there_a_blocker = True
-        
-        if symbol_count == 2 and is_there_a_blocker == False:
-          return empty_idx
-          
+
+        if (symbol in ['X', 'O'] and board.board[0][0] == symbol and board.board[2][2] == symbol):
+            return symbol
+        elif (symbol in ['X', 'O'] and board.board[0][2] == symbol and board.board[2][0] == symbol):
+            return symbol
         return None
-        
-        
-
-
 
 
 
