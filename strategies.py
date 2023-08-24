@@ -63,63 +63,33 @@ class CpuBetterStrategy(Strategy):
             # We have a winning move!
             return empty_col_index
 
-
-
-        # (Ahmed): Implement the diagonal check.
-        symbol = board.board[1][1]
-        """
-        What are the possibilities for a diagonal winning move?
-        
-        X 2 3
-        4 X 6
-        7 8 9    --- 9
-        
-        1 2 3
-        4 X 6
-        7 8 X    --- 1
-        
-        X 2 3
-        4 5 6
-        7 8 X    ---5
-        
-        X O 3
-        O X 6
-        7 8 9
-        """
         symbol_count = 0
-        empty_idx = None
-
-        if (symbol in ['X', 'O'] and board.board[0][0] == symbol and board.board[2][2] == symbol):
-            return symbol
-        elif (symbol in ['X', 'O'] and board.board[0][2] == symbol and board.board[2][0] == symbol):
-            return symbol
-        return None
-
-
-
-        if (symbol in ['X', 'O'] and board.board[0][0] == symbol and board.board[2][2] == symbol):
-          return symbol
-        elif (symbol in ['X', 'O'] and board.board[0][2] == symbol and board.board[2][0] == symbol):
-          return symbol
+        empty_col_index = None
+        for idx in range(0, 3):
+            col = 2-idx
+            if board.board[idx][col] == symbol:
+                symbol_count += 1
+            elif board.board[idx][col] in range(0, 10):
+                empty_col_index = board.board[idx][col]
+        if symbol_count == 2:
+            # We have a winning move!
+            return empty_col_index
         return None
 
     def make_turn(self):
         cpu_choice = random.choice(list(board.POSSIBLE_NUMBERS))
         # Check for a winning move
         winning_move = self.check_for_winning_move("O")
+
+        blocking_move = self.check_for_winning_move("X")
+        if blocking_move:
+            print("we spotted a blocking move!")
+            cpu_choice = blocking_move
+
         if winning_move:
             print("We spotted a winning move!")
             cpu_choice = winning_move
-
-        # (Ahmed): if there's no winning move - check to see if you can
-        # block the human.
-        for row in range(0, 3):
-            for col in range(0, 3):
-                symbol = self[row][col]
-                # print(f"Symbol: {symbol}")
-                if symbol not in ['X', 'O']:
-                    return None
-        return "N"
+            return cpu_choice
 
         print("\nCpu choice: ", cpu_choice)
         if cpu_choice in board.POSSIBLE_NUMBERS:
