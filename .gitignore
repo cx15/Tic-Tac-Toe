@@ -1,2 +1,7 @@
 .replit
 replit.nix
+/.idea/.gitignore
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/Tic-Tac-Toe.iml
+/.idea/vcs.xml
