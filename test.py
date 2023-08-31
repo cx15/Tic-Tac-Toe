@@ -171,16 +171,30 @@ class BasicFunctionTests(u.TestCase):
       self.assertEqual(None, strategy.check_for_winning_move("X"))
       self.assertEqual(None, strategy.check_for_winning_move("O"))
 
+    def test_CpuBetterStrategy_plays_winning_move(self):
+      strategy = strategies.CpuBetterStrategy()
+      myboard = board.board
+      myboard[0][0] = "O"
+      # This should already be true: myboard[1][1] = 5
+      myboard[2][2] = "O"
+      self.assertEqual(5, myboard[1][1])
+      strategy.make_turn()
+      self.assertEqual("O", myboard[1][1])
 
-# TODOs:
-# Try removing the special code for is_there_a_blocker: Done
-# Make sure the test still passes: Done
-# Then: add the code for the other diagonal.
-# Hint:  as before have idx going 0, 1, 2
-#  The board value you want to test will be: board.board[idx][2 - idx]
-# Stretch: currently the code will pick a winning move for the computer if
-# it exists.  Can you modify it so that it will also block a human
-# from winning?
+    def test_CpuBetterStrategy_plays_blocking_move(self):
+      strategy = strategies.CpuBetterStrategy()
+      myboard = board.board
+      myboard[0][0] = "X"
+      myboard[0][1] = "X"
+      # This should already be true: myboard[0][2] = 3
+
+      self.assertEqual(3, myboard[0][2])
+      strategy.make_turn()
+      self.assertEqual("O", myboard[0][2])
+
+
+
+#
 
 if __name__ == '__main__':
     u.main()

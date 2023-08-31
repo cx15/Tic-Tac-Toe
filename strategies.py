@@ -17,7 +17,7 @@ class CpuRandomStrategy(Strategy):
 
 
 class CpuBetterStrategy(Strategy):
-    def check_for_winning_move(self, symbol):
+    def check_for_winning_move(self, symbol: str):
         """Check the board to see if there's a winning move available for the given
     symbol.
 
@@ -76,22 +76,23 @@ class CpuBetterStrategy(Strategy):
             return empty_col_index
         return None
 
-    def make_turn(self):
+    def make_turn(self) -> None:
         cpu_choice = random.choice(list(board.POSSIBLE_NUMBERS))
         # Check for a winning move
         winning_move = self.check_for_winning_move("O")
 
         blocking_move = self.check_for_winning_move("X")
         if blocking_move:
-            print("we spotted a blocking move!")
+            #print("We spotted a blocking move!")
             cpu_choice = blocking_move
 
         if winning_move:
-            print("We spotted a winning move!")
+            #print("We spotted a winning move!")
             cpu_choice = winning_move
-            return cpu_choice
 
         print("\nCpu choice: ", cpu_choice)
         if cpu_choice in board.POSSIBLE_NUMBERS:
             board.modify_array(cpu_choice, 'O')
             board.POSSIBLE_NUMBERS.remove(cpu_choice)
+
+
