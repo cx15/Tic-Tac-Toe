@@ -114,9 +114,43 @@ class BasicFunctionTests(u.TestCase):
       self.assertEqual(3, strategy.check_for_winning_move(self.test_board, "X"))
       self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "O"))
 
+    #
+    #  Some additional notes to explain what we're changing.
+    #  We have a file called board.py
+    #  Before we started making changed that contained as array
+    #  called board (actually it was an array of arrays:
+    #     board = [[1, 2, 3], ....
+    #  When you see "board.board" in the older code...it's
+    #  referring to that array.  The first "board" means the file
+    # board.py.  The second means the variable board that lives in that file.
+    #
+    # Now...when we refactored the code we removed that variable...
+    # .... so any references to board.board won't work any more and will
+    # cause an error.
+    #
+    # Instead...we created a class called Board.
+    # When we refer to board.Board (like on line 17 above) that's
+    # what we mean.  Again...the first board means "the file board.py"
+    # and the second Board means "the class called Board".
+    # To complicate things....we introduced a 'member variable' to the class Board
+    # and also called *it* board.  It's the array that we had earlier...
+    # but we moved it inside the class.  When we have an *instance* of that class
+    # like my_board = Board()
+    # then we can refer to the member variable inside it as
+    # my_board.board
+    #
+    # So in most cases in the tests...when we used to say board.board
+    # (meaning the variable board that lives in the board.py file)
+    # we instead need to say
+    # self.test_board.board
+    # (meaning, the variable test_board, which set to be an instance
+    # of the class board.Board on line 17, and the 'board' variable inside
+    # of that.
+    # Phew.
+
     def test_CpuBetterStrategy_finds_winning_move_col(self):
       strategy = strategies.CpuBetterStrategy()
-      myboard = board.board
+      myboard = board.Board
       myboard[0][1] = "O"
       myboard[2][1] = "O"
       self.assertEqual(None, strategy.check_for_winning_move("X"))
