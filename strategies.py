@@ -93,7 +93,7 @@ class CpuBetterStrategy(Strategy):
 
         print("\nCpu choice: ", cpu_choice)
         if cpu_choice in board.POSSIBLE_NUMBERS:
-            game_board.modify_array(cpu_choice, 'O')
+            game_board.modify_foo(cpu_choice, 'O')
             board.POSSIBLE_NUMBERS.remove(cpu_choice)
 
 

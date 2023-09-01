@@ -30,10 +30,10 @@ class BasicFunctionTests(u.TestCase):
         self.assertEqual(golden_board, main.board_representation())
 
     def test_modify_array(self):
-        self.test_board.modify_array(3, "X")
+        self.test_board.modify_foo(3, "X")
         self.assertEqual(self.test_board.board[0][2], "X", "First row, 3 element should be X")
 
-        self.test_board.modify_array(8, "O")
+        self.test_board.modify_foo(8, "O")
         self.assertEqual(self.test_board.board[2][1], "O", "Last row, 2nd element should be O")
         
    

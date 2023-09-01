@@ -79,7 +79,7 @@ def player_turn(game_board: board.Board):
     number_picked = int(input("\nChoose a number [1-9]: "))
     if (1 <= number_picked <= 9 and
           number_picked in board.POSSIBLE_NUMBERS):
-      game_board.modify_array(number_picked, 'X')
+      game_board.modify_foo(number_picked, 'X')
       board.POSSIBLE_NUMBERS.remove(number_picked)
       return
     else:
