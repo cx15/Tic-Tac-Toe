@@ -14,7 +14,7 @@ class BasicFunctionTests(u.TestCase):
     def setUp(self) -> None:
       # Reset the board between tests
       # TODO Remove this once board has been refactored
-      board.board = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+      self.test_board = board.Board()
 
 
     def test_board_representation(self):
@@ -30,11 +30,11 @@ class BasicFunctionTests(u.TestCase):
         self.assertEqual(golden_board, main.board_representation())
 
     def test_modify_array(self):
-        board.modify_array(3, "X")
-        self.assertEqual(board.board[0][2], "X", "First row, 3 element should be X")
+        self.test_board.modify_array(3, "X")
+        self.assertEqual(self.test_board.board[0][2], "X", "First row, 3 element should be X")
 
-        board.modify_array(8, "O")
-        self.assertEqual(board.board[2][1], "O", "Last row, 2nd element should be O")
+        self.test_board.modify_array(8, "O")
+        self.assertEqual(self.test_board.board[2][1], "O", "Last row, 2nd element should be O")
         
    
     def test_check_for_winner(self):
@@ -107,11 +107,12 @@ class BasicFunctionTests(u.TestCase):
 
     def test_CpuBetterStrategy_finds_winning_move_row(self):
       strategy = strategies.CpuBetterStrategy()
-      myboard = board.board
+      myboard = self.test_board.board
+      # TODO: change the following to use modify_array instead
       myboard[0][0] = "X"
       myboard[0][1] = "X"
-      self.assertEqual(3, strategy.check_for_winning_move("X"))
-      self.assertEqual(None, strategy.check_for_winning_move("O"))
+      self.assertEqual(3, strategy.check_for_winning_move(self.test_board, "X"))
+      self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "O"))
 
     def test_CpuBetterStrategy_finds_winning_move_col(self):
       strategy = strategies.CpuBetterStrategy()
