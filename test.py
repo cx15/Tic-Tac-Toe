@@ -160,8 +160,8 @@ class BasicFunctionTests(u.TestCase):
       strategy = strategies.CpuBetterStrategy()
       myboard = self.test_board.board
       myboard[0][1] = "O"
-      self.assertEqual(None, strategy.check_for_winning_move("X"))
-      self.assertEqual(None, strategy.check_for_winning_move("O"))
+      self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "X"))
+      self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "O"))
 
     def test_CpuBetterStrategy_blocked_winning_move_row(self):
       strategy = strategies.CpuBetterStrategy()
@@ -169,8 +169,8 @@ class BasicFunctionTests(u.TestCase):
       myboard[0][0] = "X"
       myboard[0][1] = "X"
       myboard[0][2] = "O"
-      self.assertEqual(None, strategy.check_for_winning_move("X"))
-      self.assertEqual(None, strategy.check_for_winning_move("O"))
+      self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "X"))
+      self.assertEqual(None, strategy.check_for_winning_move(self.test_board,"O"))
 
     def test_CpuBetterStrategy_blocked_winning_move_col(self):
       strategy = strategies.CpuBetterStrategy()
@@ -178,24 +178,24 @@ class BasicFunctionTests(u.TestCase):
       myboard[0][1] = "O"
       myboard[1][1] = "X"
       myboard[2][1] = "O"
-      self.assertEqual(None, strategy.check_for_winning_move("X"))
-      self.assertEqual(None, strategy.check_for_winning_move("O"))
+      self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "X"))
+      self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "O"))
 
     def test_CpuBetterStrategy_finds_winning_move_diag1(self):
       strategy = strategies.CpuBetterStrategy()
       myboard = self.test_board.board
       myboard[0][0] = "O"
       myboard[2][2] = "O"
-      self.assertEqual(None, strategy.check_for_winning_move("X"))
-      self.assertEqual(5, strategy.check_for_winning_move("O"))
+      self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "X"))
+      self.assertEqual(5, strategy.check_for_winning_move(self.test_board, "O"))
 
     def test_CpuBetterStrategy_finds_winning_move_diag2(self):
       strategy = strategies.CpuBetterStrategy()
       myboard = self.test_board.board
       myboard[0][2] = "X"
       myboard[1][1] = "X"
-      self.assertEqual(7, strategy.check_for_winning_move("X"))
-      self.assertEqual(None, strategy.check_for_winning_move("O"))
+      self.assertEqual(7, strategy.check_for_winning_move(self.test_board, "X"))
+      self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "O"))
 
     def test_CpuBetterStrategy_blocked_winning_move_diag2(self):
       strategy = strategies.CpuBetterStrategy()
@@ -203,8 +203,8 @@ class BasicFunctionTests(u.TestCase):
       myboard[0][2] = "X"
       myboard[1][1] = "X"
       myboard[2][0] = "O"
-      self.assertEqual(None, strategy.check_for_winning_move("X"))
-      self.assertEqual(None, strategy.check_for_winning_move("O"))
+      self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "X"))
+      self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "O"))
 
     def test_CpuBetterStrategy_plays_winning_move(self):
       strategy = strategies.CpuBetterStrategy()
