@@ -13,14 +13,14 @@ import strategies
 
 
 #Functions to print out a game board
-def board_representation():
+def board_representation(game_board: board.Board):
   representation = ""
   for a in range(board.ROWS):
     representation += "\n+---+---+---+\n"
     representation += "|"
     for b in range(board.COLS):
       representation += " "
-      representation += str(board.board[a][b])
+      representation += str(game_board.board[a][b])
       representation += " |"
   representation += "\n+---+---+---+\n"
   return representation;
@@ -28,8 +28,8 @@ def board_representation():
   # Check to see if nobody won and the board is full.
 
 
-def print_game_board():
-  print(board_representation())
+def print_game_board(game_board: board.Board):
+  print(board_representation(game_board))
 
 
 # Define function to check for a winner
@@ -73,13 +73,13 @@ def check_for_winner(the_board):
   return "N"
 
 
-def player_turn():
-  print_game_board()
+def player_turn(game_board: board.Board):
+  print_game_board(game_board)
   while True:
     number_picked = int(input("\nChoose a number [1-9]: "))
     if (1 <= number_picked <= 9 and
           number_picked in board.POSSIBLE_NUMBERS):
-      board.modify_array(number_picked, 'X')
+      game_board.modify_array(number_picked, 'X')
       board.POSSIBLE_NUMBERS.remove(number_picked)
       return
     else:
@@ -95,18 +95,19 @@ if __name__ == "__main__":
     print("----------------------")
 
     our_strategy = strategies.CpuBetterStrategy()
+    game_board = board.Board()
 
     while not leave_loop:
       # the player's turn
       if(turn_counter % 2 == 0):
-        player_turn()
+        player_turn(game_board)
       else:
         # the computer's turn
-        our_strategy.make_turn()
+        our_strategy.make_turn(game_board)
 
       turn_counter += 1
 
-      winner = check_for_winner(board.board)
+      winner = check_for_winner(game_board.board)
       if winner == "O":
         print("O has won!")
         leave_loop = True
@@ -117,5 +118,5 @@ if __name__ == "__main__":
         leave_loop = True
         print("\nGame over! Thank you for playing :)")
 
-      print_game_board()
+      print_game_board(game_board)
 

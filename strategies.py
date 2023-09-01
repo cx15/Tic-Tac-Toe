@@ -77,12 +77,12 @@ class CpuBetterStrategy(Strategy):
             return empty_col_index
         return None
 
-    def make_turn(self) -> None:
+    def make_turn(self, game_board: board.Board) -> None:
         cpu_choice = random.choice(list(board.POSSIBLE_NUMBERS))
         # Check for a winning move
-        winning_move = self.check_for_winning_move("O")
+        winning_move = self.check_for_winning_move(game_board, "O")
 
-        blocking_move = self.check_for_winning_move("X")
+        blocking_move = self.check_for_winning_move(game_board, "X")
         if blocking_move:
             #print("We spotted a blocking move!")
             cpu_choice = blocking_move
@@ -93,7 +93,7 @@ class CpuBetterStrategy(Strategy):
 
         print("\nCpu choice: ", cpu_choice)
         if cpu_choice in board.POSSIBLE_NUMBERS:
-            board.modify_array(cpu_choice, 'O')
+            game_board.modify_array(cpu_choice, 'O')
             board.POSSIBLE_NUMBERS.remove(cpu_choice)
 
 
