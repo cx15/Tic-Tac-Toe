@@ -210,7 +210,7 @@ class BasicFunctionTests(u.TestCase):
       strategy = strategies.CpuBetterStrategy()
       myboard = self.test_board.board
       myboard[0][0] = "O"
-      # This should already be true: myboard[1][1] = 5
+      # This should already be true: myboard[1][1] = 5 m
       myboard[2][2] = "O"
       self.assertEqual(5, myboard[1][1])
       strategy.make_turn()
