@@ -14,7 +14,7 @@ class Board:
   """Represents a tic tac toe board"""
   def __init__(self):
     print("THe board got created")
-    self.board = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+    self._board = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 
   def modify_foo(self, num, turn):
     """
@@ -28,7 +28,14 @@ class Board:
     # The col number is the "remainder when we divide by 3"
     row = (num - 1) // 3
     col = (num - 1) % 3
-    self.board[row][col] = turn
+    self._board[row][col] = turn
+
+  def get_symbol(self, row: int, col: int):
+    """
+    Given the row and column return the symbol at that location
+    or the number if the location hasn't been used.
+    """
+    return self._board[row][col]
 
 
 

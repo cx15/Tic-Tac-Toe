@@ -31,7 +31,7 @@ class BasicFunctionTests(u.TestCase):
 
     def test_modify_array(self):
         self.test_board.modify_foo(3, "X")
-        self.assertEqual(self.test_board.board[0][2], "X", "First row, 3 element should be X")
+        self.assertEqual(self.test_board.get_symbol(row=0, col=2), "X", "First row, 3 element should be X")
 
         self.test_board.modify_foo(8, "O")
         self.assertEqual(self.test_board.board[2][1], "O", "Last row, 2nd element should be O")
@@ -108,7 +108,11 @@ class BasicFunctionTests(u.TestCase):
     def test_CpuBetterStrategy_finds_winning_move_row(self):
       strategy = strategies.CpuBetterStrategy()
       myboard = self.test_board.board
-      # TODO: change the following to use modify_array instead
+      # TODO: change the following to use modify_foo instead
+      # myboard.modify_foo(1, "X")
+      # myboard.modify_foo(2, "X")
+      # OR: add a new method to the the board class that allows modification
+      # using row and columns instead.
       myboard[0][0] = "X"
       myboard[0][1] = "X"
       self.assertEqual(3, strategy.check_for_winning_move(self.test_board, "X"))
