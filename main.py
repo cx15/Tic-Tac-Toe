@@ -15,10 +15,10 @@ import strategies
 #Functions to print out a game board
 def board_representation(game_board: board.Board):
   representation = ""
-  for a in range(board.ROWS):
+  for a in range(game_board.ROWS):
     representation += "\n+---+---+---+\n"
     representation += "|"
-    for b in range(board.COLS):
+    for b in range(game_board.COLS):
       representation += " "
       representation += str(game_board.get_symbol(row=a, col=b))
       representation += " |"
@@ -78,9 +78,8 @@ def player_turn(game_board: board.Board):
   while True:
     number_picked = int(input("\nChoose a number [1-9]: "))
     if (1 <= number_picked <= 9 and
-          number_picked in board.POSSIBLE_NUMBERS):
+        game_board.is_valid_play(number_picked)):
       game_board.modify_board(number_picked, 'X')
-      board.POSSIBLE_NUMBERS.remove(number_picked)
       return
     else:
       print("Invalid input. Please try again.")

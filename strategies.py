@@ -79,6 +79,8 @@ class CpuBetterStrategy(Strategy):
         return None
 
     def make_turn(self, game_board: board.Board) -> None:
+        # TODO: Update this method so that it works again and doesn't
+        # 'dip into' the POSSIBLE_NUMBERS list.
         cpu_choice = random.choice(list(board.POSSIBLE_NUMBERS))
         # Check for a winning move
         winning_move = self.check_for_winning_move(game_board, "O")
