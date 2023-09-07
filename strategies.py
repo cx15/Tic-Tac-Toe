@@ -32,10 +32,11 @@ class CpuBetterStrategy(Strategy):
             symbol_count = 0
             empty_col_index = None
             for col in range(0, 3):
-                if board_to_check._board[row][col] == symbol:
+                if board_to_check.get_symbol(row, col) == symbol:
                     symbol_count += 1
-                elif board_to_check._board[row][col] in range(0, 10):
-                    empty_col_index = board_to_check._board[row][col]
+                elif board_to_check.get_symbol(row, col) in range(0, 10):
+                    empty_col_index = board_to_check.get_symbol(
+                        col=col, row=row)
             if symbol_count == 2:
                 # We have a winning move!
                 return empty_col_index
@@ -45,10 +46,10 @@ class CpuBetterStrategy(Strategy):
             symbol_count = 0
             empty_col_index = None
             for row in range(0, 3):
-                if board_to_check._board[row][col] == symbol:
+                if board_to_check.get_symbol(row, col) == symbol:
                     symbol_count += 1
-                elif board_to_check._board[row][col] in range(0, 10):
-                    empty_col_index = board_to_check._board[row][col]
+                elif board_to_check.get_symbol(row, col) in range(0, 10):
+                    empty_col_index = board_to_check.get_symbol(row, col)
             if symbol_count == 2:
                 # We have a winning move!
                 return empty_col_index
@@ -56,10 +57,10 @@ class CpuBetterStrategy(Strategy):
         symbol_count = 0
         empty_col_index = None
         for idx in range(0, 3):
-            if board_to_check._board[idx][idx] == symbol:
+            if board_to_check.get_symbol(idx, idx) == symbol:
                 symbol_count += 1
-            elif board_to_check._board[idx][idx] in range(0, 10):
-                empty_col_index = board_to_check._board[idx][idx]
+            elif board_to_check.get_symbol(idx, idx) in range(0, 10):
+                empty_col_index = board_to_check.get_symbol(idx, idx)
         if symbol_count == 2:
             # We have a winning move!
             return empty_col_index
@@ -68,10 +69,10 @@ class CpuBetterStrategy(Strategy):
         empty_col_index = None
         for idx in range(0, 3):
             col = 2-idx
-            if board_to_check._board[idx][col] == symbol:
+            if board_to_check.get_symbol(idx, col) == symbol:
                 symbol_count += 1
-            elif board_to_check._board[idx][col] in range(0, 10):
-                empty_col_index = board_to_check._board[idx][col]
+            elif board_to_check.get_symbol(idx, col) in range(0, 10):
+                empty_col_index = board_to_check.get_symbol(idx, col)
         if symbol_count == 2:
             # We have a winning move!
             return empty_col_index
@@ -93,7 +94,7 @@ class CpuBetterStrategy(Strategy):
 
         print("\nCpu choice: ", cpu_choice)
         if cpu_choice in board.POSSIBLE_NUMBERS:
-            game_board.modify_foo(cpu_choice, 'O')
+            game_board.modify_board(cpu_choice, 'O')
             board.POSSIBLE_NUMBERS.remove(cpu_choice)
 
 

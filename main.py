@@ -20,7 +20,7 @@ def board_representation(game_board: board.Board):
     representation += "|"
     for b in range(board.COLS):
       representation += " "
-      representation += str(game_board.board[a][b])
+      representation += str(game_board.get_symbol(row=a, col=b))
       representation += " |"
   representation += "\n+---+---+---+\n"
   return representation;
@@ -42,31 +42,31 @@ def check_for_winner(the_board):
   """
   # Check to see if there's a complete row
   for row in range(0, 3):
-    symbol = the_board[row][0]
-    if (symbol in ['X', 'O'] and the_board[row][1] == symbol
-        and the_board[row][2] == symbol):
+    symbol = the_board.get_symbol(row, 0)
+    if (symbol in ['X', 'O'] and the_board.get_symbol(row, 1) == symbol
+        and the_board.get_symbol(row, 2) == symbol):
       return symbol
 
   # Check to see if there's a complete column
   for col in range(0, 3):
-    symbol = the_board[0][col]
-    if (symbol in ['X', 'O'] and the_board[1][col] == symbol
-        and the_board[2][col] == symbol):
+    symbol = the_board.get_symbol(0, col)
+    if (symbol in ['X', 'O'] and the_board.get_symbol(1, col) == symbol
+        and the_board.get_symbol(2, col) == symbol):
       return symbol
 
   # Cross wins
-  symbol = the_board[1][1]
-  if (symbol in ['X', 'O'] and the_board[0][0] == symbol and
-        the_board[2][2] == symbol):
+  symbol = the_board.get_symbol(1, 1)
+  if (symbol in ['X', 'O'] and the_board.get_symbol(0, 0) == symbol and
+        the_board.get_symbol(2, 2) == symbol):
     return symbol
-  elif (symbol in ['X', 'O'] and the_board[0][2] == symbol and
-        the_board[2][0] == symbol):
+  elif (symbol in ['X', 'O'] and the_board.get_symbol(0, 2) == symbol and
+        the_board.get_symbol(2, 0) == symbol):
     return symbol
 
   # board is full
   for row in range(0, 3):
     for col in range(0, 3):
-      symbol = the_board[row][col]
+      symbol = the_board.get_symbol(row, col)
       # print(f"Symbol: {symbol}")
       if symbol not in ['X', 'O']:
         return None
@@ -79,7 +79,7 @@ def player_turn(game_board: board.Board):
     number_picked = int(input("\nChoose a number [1-9]: "))
     if (1 <= number_picked <= 9 and
           number_picked in board.POSSIBLE_NUMBERS):
-      game_board.modify_foo(number_picked, 'X')
+      game_board.modify_board(number_picked, 'X')
       board.POSSIBLE_NUMBERS.remove(number_picked)
       return
     else:
@@ -107,7 +107,7 @@ if __name__ == "__main__":
 
       turn_counter += 1
 
-      winner = check_for_winner(game_board.board)
+      winner = check_for_winner(game_board)
       if winner == "O":
         print("O has won!")
         leave_loop = True
