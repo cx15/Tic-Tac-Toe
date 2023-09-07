@@ -150,11 +150,11 @@ class BasicFunctionTests(u.TestCase):
 
     def test_CpuBetterStrategy_finds_winning_move_col(self):
       strategy = strategies.CpuBetterStrategy()
-      myboard = self.test_board.modify_board
-      myboard.modify_array(2,"O")
-      myboard.modify_array(5,"O")
-      self.assertEqual(None, strategy.check_for_winning_move("X"))
-      self.assertEqual(5, strategy.check_for_winning_move("O"))
+      myboard = self.test_board
+      myboard.modify_board(2, "O")
+      myboard.modify_board(5, "O")
+      self.assertEqual(None, strategy.check_for_winning_move(myboard, "X"))
+      self.assertEqual(8, strategy.check_for_winning_move(myboard, "O"))
 
     def test_CpuBetterStrategy_no_winning_move_col(self):
       strategy = strategies.CpuBetterStrategy()
