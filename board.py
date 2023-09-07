@@ -16,7 +16,7 @@ class Board:
     print("THe board got created")
     self._board = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 
-  def modify_foo(self, num, turn):
+  def modify_board(self, num, turn):
     """
     Modifies the board array when a player takes a turn.
 
