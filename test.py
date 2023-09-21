@@ -29,7 +29,7 @@ class BasicFunctionTests(u.TestCase):
 """
         self.assertEqual(golden_board, main.board_representation())
 
-    def test_modify_array(self):
+    def test_modify_board(self):
         self.test_board.modify_board(3, "X")
         self.assertEqual(self.test_board.modify_board[0][2], "X", "First row, 3 element should be X")
 
@@ -108,9 +108,9 @@ class BasicFunctionTests(u.TestCase):
     def test_CpuBetterStrategy_finds_winning_move_row(self):
       strategy = strategies.CpuBetterStrategy()
       myboard = self.test_board.modify_board
-      # TODO: change the following to use modify_array instead
-      myboard.modify_array(1,"X")
-      myboard.modify_array(2,"X")
+      # TODO: change the following to use modify_board instead
+      myboard.modify_board(1,"X")
+      myboard.modify_board(2,"X")
       self.assertEqual(3, strategy.check_for_winning_move(self.test_board, "X"))
       self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "O"))
 
@@ -159,16 +159,16 @@ class BasicFunctionTests(u.TestCase):
     def test_CpuBetterStrategy_no_winning_move_col(self):
       strategy = strategies.CpuBetterStrategy()
       myboard = self.test_board.modify_board
-      myboard.modify_array(2,"O")
+      myboard.modify_board(2,"O")
       self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "X"))
       self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "O"))
 
     def test_CpuBetterStrategy_blocked_winning_move_row(self):
       strategy = strategies.CpuBetterStrategy()
       myboard = self.test_board.modify_board
-      myboard.modify_array(1,"X")
-      myboard.modify_array(2,"X")
-      myboard.modify_array(7,"O")
+      myboard.modify_board(1,"X")
+      myboard.modify_board(2,"X")
+      myboard.modify_board(7,"O")
       self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "X"))
       self.assertEqual(None, strategy.check_for_winning_move(self.test_board,"O"))
 

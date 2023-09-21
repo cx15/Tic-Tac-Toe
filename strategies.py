@@ -12,7 +12,7 @@ class CpuRandomStrategy(Strategy):
         cpu_choice = random.choice(list(board.POSSIBLE_NUMBERS))
         print("\nCpu choice: ", cpu_choice)
         if cpu_choice in board.POSSIBLE_NUMBERS:
-            board.modify_array(cpu_choice, 'O')
+            board.modify_board(cpu_choice, 'O')
             board.POSSIBLE_NUMBERS.remove(cpu_choice)
 
 
