@@ -33,7 +33,7 @@ def print_game_board(game_board: board.Board):
 
 
 # Define function to check for a winner
-def check_for_winner(the_board):
+def check_for_winner(the_board: board.Board):
   """Returns the winner, if any.
 
   :param the_board - a 3X3 array of "X", "O" or ""
@@ -98,7 +98,7 @@ if __name__ == "__main__":
 
     while not leave_loop:
       # the player's turn
-      if(turn_counter % 2 == 0):
+      if turn_counter % 2 == 0:
         player_turn(game_board)
       else:
         # the computer's turn

@@ -3,29 +3,27 @@ import random
 
 
 class Strategy:
-    def make_turn(self):
+    def make_turn(self, game_board: board.Board):
         raise NotImplementedError("You need to implement this")
 
 
 class CpuRandomStrategy(Strategy):
-    def make_turn(self):
-        cpu_choice = random.choice(list(board.POSSIBLE_NUMBERS))
+    def make_turn(self, game_board: board.Board):
+        cpu_choice = random.choice(game_board.get_open_positions())
         print("\nCpu choice: ", cpu_choice)
-        if cpu_choice in board.POSSIBLE_NUMBERS:
-            board.modify_board(cpu_choice, 'O')
-            board.POSSIBLE_NUMBERS.remove(cpu_choice)
+        game_board.modify_board(cpu_choice, 'O')
 
 
 class CpuBetterStrategy(Strategy):
     def check_for_winning_move(
         self, board_to_check: board.Board, symbol: str):
-        """Check the board to see if there's a winning move available for the given
-    symbol.
+        """Check the board to see if there's a winning move available for the
+        given symbol.
 
-    If there's a winning move return the number corresponding to it.
-    Returns None if there's no winning move.
+        If there's a winning move return the number corresponding to it.
+        Returns None if there's no winning move.
 
-    symbol - either an X or a O
+        symbol - either an X or a O
     """
         # Check to see if there's a complete row
         for row in range(0, 3):
@@ -81,7 +79,7 @@ class CpuBetterStrategy(Strategy):
     def make_turn(self, game_board: board.Board) -> None:
         # TODO: Update this method so that it works again and doesn't
         # 'dip into' the POSSIBLE_NUMBERS list.
-        cpu_choice = random.choice(list(board.POSSIBLE_NUMBERS))
+        cpu_choice = random.choice(game_board.get_open_positions())
         # Check for a winning move
         winning_move = self.check_for_winning_move(game_board, "O")
 
@@ -95,8 +93,9 @@ class CpuBetterStrategy(Strategy):
             cpu_choice = winning_move
 
         print("\nCpu choice: ", cpu_choice)
-        if cpu_choice in board.POSSIBLE_NUMBERS:
+        if game_board.is_valid_play(cpu_choice):
             game_board.modify_board(cpu_choice, 'O')
-            board.POSSIBLE_NUMBERS.remove(cpu_choice)
+        else:
+            raise Exception("CPU choice wasn't valid play")
 
 
