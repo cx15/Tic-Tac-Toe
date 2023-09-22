@@ -1,77 +1,14 @@
 import board
 import strategies
+from display import print_game_board
 
 # TODOs
 # We will:
-# 1) Make the game work
+# 1) Make the game work DONE
 # 2) Make it possible to do PvP, PvC, or CvC
-# 3) Make it possible to swap in better computer players
+# 3) Make it possible to swap in better computer players DONE
 # 4) Replace the text interface with a graphical interface.
 # 5) Maybe? See if we can get the computer to *learn*.
-
-#variables to operate the structure of the games
-
-
-#Functions to print out a game board
-def board_representation(game_board: board.Board):
-  representation = ""
-  for a in range(game_board.ROWS):
-    representation += "\n+---+---+---+\n"
-    representation += "|"
-    for b in range(game_board.COLS):
-      representation += " "
-      representation += str(game_board.get_symbol(row=a, col=b))
-      representation += " |"
-  representation += "\n+---+---+---+\n"
-  return representation;
-
-  # Check to see if nobody won and the board is full.
-
-
-def print_game_board(game_board: board.Board):
-  print(board_representation(game_board))
-
-
-# Define function to check for a winner
-def check_for_winner(the_board: board.Board):
-  """Returns the winner, if any.
-
-  :param the_board - a 3X3 array of "X", "O" or ""
-  Returns "X", "O" depending on who has won or "N" if it's a
-  tie or "None" otherwise.
-  """
-  # Check to see if there's a complete row
-  for row in range(0, 3):
-    symbol = the_board.get_symbol(row, 0)
-    if (symbol in ['X', 'O'] and the_board.get_symbol(row, 1) == symbol
-        and the_board.get_symbol(row, 2) == symbol):
-      return symbol
-
-  # Check to see if there's a complete column
-  for col in range(0, 3):
-    symbol = the_board.get_symbol(0, col)
-    if (symbol in ['X', 'O'] and the_board.get_symbol(1, col) == symbol
-        and the_board.get_symbol(2, col) == symbol):
-      return symbol
-
-  # Cross wins
-  symbol = the_board.get_symbol(1, 1)
-  if (symbol in ['X', 'O'] and the_board.get_symbol(0, 0) == symbol and
-        the_board.get_symbol(2, 2) == symbol):
-    return symbol
-  elif (symbol in ['X', 'O'] and the_board.get_symbol(0, 2) == symbol and
-        the_board.get_symbol(2, 0) == symbol):
-    return symbol
-
-  # board is full
-  for row in range(0, 3):
-    for col in range(0, 3):
-      symbol = the_board.get_symbol(row, col)
-      # print(f"Symbol: {symbol}")
-      if symbol not in ['X', 'O']:
-        return None
-  return "N"
-
 
 def player_turn(game_board: board.Board):
   print_game_board(game_board)
@@ -93,7 +30,7 @@ if __name__ == "__main__":
     print("welcome to Tic Tac Toe")
     print("----------------------")
 
-    our_strategy = strategies.CpuBetterStrategy()
+    cpu_strategy = strategies.CpuBetterStrategy()
     game_board = board.Board()
 
     while not leave_loop:
@@ -102,11 +39,11 @@ if __name__ == "__main__":
         player_turn(game_board)
       else:
         # the computer's turn
-        our_strategy.make_turn(game_board)
+        cpu_strategy.make_turn(game_board)
 
       turn_counter += 1
 
-      winner = check_for_winner(game_board)
+      winner = game_board.check_for_winner()
       if winner == "O":
         print("O has won!")
         leave_loop = True

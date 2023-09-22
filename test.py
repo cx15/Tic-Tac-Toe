@@ -6,6 +6,7 @@ These are the tests for Tic Tac Toe
 import unittest as u
 
 import board
+import display
 import main
 import strategies
 
@@ -27,7 +28,7 @@ class BasicFunctionTests(u.TestCase):
 | 7 | 8 | 9 |
 +---+---+---+
 """
-        self.assertEqual(golden_board, main.board_representation(self.test_board))
+        self.assertEqual(golden_board, display.board_representation(self.test_board))
 
     def test_modify_board(self):
         self.test_board.modify_board(3, "X")
@@ -45,18 +46,18 @@ class BasicFunctionTests(u.TestCase):
                              ["O", "O", ""]]
         board_x_wins = board.Board(board_x_wins_data)
 
-        result = main.check_for_winner(board_x_wins)
+        result = board_x_wins.check_for_winner()
         # Returns "X", "O" or "N"
         self.assertEqual("X", result)
 
-        result = main.check_for_winner(board_x_wins)
+        result = board_x_wins.check_for_winner()
         self.assertEqual("X", result)
 
         board_noone_wins = board.Board([["X", "",  "X"],
                                         ["O", "X", "O"],
                                         ["O", "O", ""]])
 
-        result = main.check_for_winner(board_noone_wins)
+        result = board_noone_wins.check_for_winner()
         self.assertEqual(None, result,
                          msg="In this case noone should have won")
 
@@ -64,7 +65,7 @@ class BasicFunctionTests(u.TestCase):
                                     ["O", "X", "O"],
                                     ["O", "O", "O"]])
 
-        result = main.check_for_winner(board_O_wins)
+        result = board_O_wins.check_for_winner()
         self.assertEqual("O", result)
 
         board_O_wins_diag = board.Board(
@@ -72,7 +73,7 @@ class BasicFunctionTests(u.TestCase):
                                ["O", "O", "O"],
                                ["O", "O", ""]])
 
-        result = main.check_for_winner(board_O_wins_diag)
+        result = board_O_wins_diag.check_for_winner()
         self.assertEqual("O", result)
 
         board_X_wins_vert = board.Board(
@@ -80,7 +81,7 @@ class BasicFunctionTests(u.TestCase):
                                ["O", "X", "O"],
                                ["O", "X", ""]])
 
-        result = main.check_for_winner(board_X_wins_vert)
+        result = board_X_wins_vert.check_for_winner()
         self.assertEqual("X", result)
 
 
@@ -93,7 +94,7 @@ class BasicFunctionTests(u.TestCase):
       board_game_over = board.Board()
       board_game_over.fill_from_array(board_data)
 
-      result = main.check_for_winner(board_game_over)
+      result = board_game_over.check_for_winner()
       self.assertEqual("N", result)
 
 

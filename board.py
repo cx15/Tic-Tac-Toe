@@ -49,5 +49,42 @@ class Board:
         self.modify_board(idx, data[row][col])
         idx += 1
 
+  def check_for_winner(self):
+    """Returns the winner, if any.
 
+    Returns "X", "O" depending on who has won or "N" if it's a
+    tie or "None" otherwise.
+    """
+    # currently only works for 3x3 boards.
 
+    # Check to see if there's a complete row
+    for row in range(0, self.ROWS):
+      symbol = self.get_symbol(row, 0)
+      if (symbol in ['X', 'O'] and self.get_symbol(row, 1) == symbol
+          and self.get_symbol(row, 2) == symbol):
+        return symbol
+
+    # Check to see if there's a complete column
+    for col in range(0, self.COLS):
+      symbol = self.get_symbol(0, col)
+      if (symbol in ['X', 'O'] and self.get_symbol(1, col) == symbol
+          and self.get_symbol(2, col) == symbol):
+        return symbol
+
+    # Cross wins
+    symbol = self.get_symbol(1, 1)
+    if (symbol in ['X', 'O'] and self.get_symbol(0, 0) == symbol and
+          self.get_symbol(2, 2) == symbol):
+      return symbol
+    elif (symbol in ['X', 'O'] and self.get_symbol(0, 2) == symbol and
+          self.get_symbol(2, 0) == symbol):
+      return symbol
+
+    # board is full
+    for row in range(0, self.ROWS):
+      for col in range(0, self.COLS):
+        symbol = self.get_symbol(row, col)
+        # print(f"Symbol: {symbol}")
+        if symbol not in ['X', 'O']:
+          return None
+    return "N"
