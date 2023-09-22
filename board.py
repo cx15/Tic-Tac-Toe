@@ -10,6 +10,14 @@ class Board:
     if initial_data:
       self.fill_from_array(initial_data)
 
+  def row_col_from_num(self, num):
+    # num goes from 1 to 9
+    # The row number is num / 3
+    # The col number is the "remainder when we divide by 3"
+    row = (num - 1) // self.ROWS
+    col = (num - 1) % self.COLS
+    return row, col
+
   def modify_board(self, num, turn):
     """
     Modifies the board array when a player takes a turn.
@@ -17,11 +25,7 @@ class Board:
     :param num - a number from 1 to 9 representing a position on the board
     :param turn - either "X" or "O" depending on the turn.
 """
-    # num goes from 1 to 9
-    # The row number is num / 3
-    # The col number is the "remainder when we divide by 3"
-    row = (num - 1) // self.ROWS
-    col = (num - 1) % self.COLS
+    row, col = self.row_col_from_num(num)
     self._board[row][col] = turn
     self._remaining_positions.remove(num)
 
@@ -30,6 +34,14 @@ class Board:
     Given the row and column return the symbol at that location
     or the number if the location hasn't been used.
     """
+    return self._board[row][col]
+
+  def get_symbol_by_pos(self, pos: int):
+    """
+    Given the play position 1-9 return the symbol at that location
+    or the number if the location hasn't been used.
+    """
+    row, col = self.row_col_from_num(pos)
     return self._board[row][col]
 
   def is_valid_play(self, num):

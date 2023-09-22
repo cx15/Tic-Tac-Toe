@@ -77,8 +77,6 @@ class CpuBetterStrategy(Strategy):
         return None
 
     def make_turn(self, game_board: board.Board) -> None:
-        # TODO: Update this method so that it works again and doesn't
-        # 'dip into' the POSSIBLE_NUMBERS list.
         cpu_choice = random.choice(game_board.get_open_positions())
         # Check for a winning move
         winning_move = self.check_for_winning_move(game_board, "O")
@@ -93,6 +91,42 @@ class CpuBetterStrategy(Strategy):
             cpu_choice = winning_move
 
         print("\nCpu choice: ", cpu_choice)
+        if game_board.is_valid_play(cpu_choice):
+            game_board.modify_board(cpu_choice, 'O')
+        else:
+            raise Exception("CPU choice wasn't a valid play")
+
+class CpuMirrorStrategy(Strategy):
+    """
+    This Cpu strategy just tries to copy what the human player does.
+    """
+    def make_turn(self, game_board: board.Board) -> None:
+        # Go through all the positions and find the opposite
+        """
+        Actually don't need this map as the formula is simple: if the
+        human plays X the computer should play 10-X
+        opposites_map = {
+            1: 9,
+            2: 8,
+            3: 7,
+            4: 6,
+            5: 5,
+            6: 4,
+            7: 3,
+            8: 2,
+            9: 1
+        }
+        """
+        for pos in range(0, 9):
+          symbol = game_board.get_symbol_by_pos(pos)
+          if symbol == "X":
+            possible_cpu_pos = 10 - pos
+            if game_board.is_valid_play(possible_cpu_pos):
+              game_board.modify_board(possible_cpu_pos, "O")
+              return
+
+        # None of the opposites were valid, so just pick randomly.
+        cpu_choice = random.choice(game_board.get_open_positions())
         if game_board.is_valid_play(cpu_choice):
             game_board.modify_board(cpu_choice, 'O')
         else:

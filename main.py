@@ -30,7 +30,7 @@ if __name__ == "__main__":
     print("welcome to Tic Tac Toe")
     print("----------------------")
 
-    cpu_strategy = strategies.CpuBetterStrategy()
+    cpu_strategy = strategies.CpuMirrorStrategy()
     game_board = board.Board()
 
     while not leave_loop:
