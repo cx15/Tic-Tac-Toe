@@ -6,7 +6,6 @@ class Strategy:
     def make_turn(self, game_board: board.Board):
         raise NotImplementedError("You need to implement this")
 
-
 class CpuRandomStrategy(Strategy):
     def make_turn(self, game_board: board.Board):
         cpu_choice = random.choice(game_board.get_open_positions())
@@ -117,7 +116,7 @@ class CpuMirrorStrategy(Strategy):
             9: 1
         }
         """
-        for pos in range(0, 9):
+        for pos in range(1, 10):
           symbol = game_board.get_symbol_by_pos(pos)
           if symbol == "X":
             possible_cpu_pos = 10 - pos
@@ -131,5 +130,3 @@ class CpuMirrorStrategy(Strategy):
             game_board.modify_board(cpu_choice, 'O')
         else:
             raise Exception("CPU choice wasn't valid play")
-
-

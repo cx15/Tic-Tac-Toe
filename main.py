@@ -2,6 +2,9 @@ import board
 import strategies
 from display import print_game_board
 
+input("pick pvp pvc")
+
+
 # TODOs
 # We will:
 # 1) Make the game work DONE
@@ -10,13 +13,13 @@ from display import print_game_board
 # 4) Replace the text interface with a graphical interface.
 # 5) Maybe? See if we can get the computer to *learn*.
 
-def player_turn(game_board: board.Board):
+def player_turn(game_board: board.Board, player_symbol='X'):
   print_game_board(game_board)
   while True:
-    number_picked = int(input("\nChoose a number [1-9]: "))
+    number_picked = int(input("\nPlayer " + player_symbol + " pick a number [1-9]: "))
     if (1 <= number_picked <= 9 and
         game_board.is_valid_play(number_picked)):
-      game_board.modify_board(number_picked, 'X')
+      game_board.modify_board(number_picked, player_symbol)
       return
     else:
       print("Invalid input. Please try again.")
@@ -36,11 +39,11 @@ if __name__ == "__main__":
     while not leave_loop:
       # the player's turn
       if turn_counter % 2 == 0:
-        player_turn(game_board)
+        player_turn(game_board, 'X')
       else:
         # the computer's turn
-        cpu_strategy.make_turn(game_board)
-
+        #cpu_strategy.make_turn(game_board)
+        player_turn(game_board, 'O')
       turn_counter += 1
 
       winner = game_board.check_for_winner()

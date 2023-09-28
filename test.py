@@ -6,7 +6,6 @@ These are the tests for Tic Tac Toe
 import unittest as u
 
 import board
-import display
 import main
 import strategies
 
@@ -28,73 +27,67 @@ class BasicFunctionTests(u.TestCase):
 | 7 | 8 | 9 |
 +---+---+---+
 """
-        self.assertEqual(golden_board, display.board_representation(self.test_board))
+        self.assertEqual(golden_board, main.board_representation())
 
     def test_modify_board(self):
         self.test_board.modify_board(3, "X")
-        self.assertEqual(self.test_board.get_symbol(0, 2), "X",
-                         "First row, 3 element should be X")
+        self.assertEqual(self.test_board.modify_board[0][2], "X", "First row, 3 element should be X")
 
         self.test_board.modify_board(8, "O")
-        self.assertEqual(self.test_board.get_symbol(2, 1),
-                         "O", "Last row, 2nd element should be O")
+        self.assertEqual(self.test_board.modify_board[2][1], "O", "Last row, 2nd element should be O")
         
    
     def test_check_for_winner(self):
-        board_x_wins_data = [["X", "X", "X"],
-                             ["O", "X", "O"],
-                             ["O", "O", ""]]
-        board_x_wins = board.Board(board_x_wins_data)
+        board_x_wins = [["X", "X", "X"],
+                        ["O", "X", "O"],
+                        ["O", "O", ""]]
 
-        result = board_x_wins.check_for_winner()
+        result = main.check_for_winner(board_x_wins)
         # Returns "X", "O" or "N"
         self.assertEqual("X", result)
 
-        result = board_x_wins.check_for_winner()
+        result = main.check_for_winner(
+          [board_x_wins[2],
+           board_x_wins[0],
+           board_x_wins[1]])
         self.assertEqual("X", result)
 
-        board_noone_wins = board.Board([["X", "",  "X"],
-                                        ["O", "X", "O"],
-                                        ["O", "O", ""]])
+        board_noone_wins = [["X", "",  "X"],
+                            ["O", "X", "O"],
+                            ["O", "O", ""]]
 
-        result = board_noone_wins.check_for_winner()
+        result = main.check_for_winner(board_noone_wins)
         self.assertEqual(None, result,
                          msg="In this case noone should have won")
 
-        board_O_wins = board.Board([["X", "",  "X"],
-                                    ["O", "X", "O"],
-                                    ["O", "O", "O"]])
+        board_O_wins = [["X", "",  "X"],
+                        ["O", "X", "O"],
+                        ["O", "O", "O"]]
 
-        result = board_O_wins.check_for_winner()
+        result = main.check_for_winner(board_O_wins)
         self.assertEqual("O", result)
 
-        board_O_wins_diag = board.Board(
-                              [["X", "",  "O"],
-                               ["O", "O", "O"],
-                               ["O", "O", ""]])
+        board_O_wins_diag = [["X", "",  "O"],
+                             ["O", "O", "O"],
+                             ["O", "O", ""]]
 
-        result = board_O_wins_diag.check_for_winner()
+        result = main.check_for_winner(board_O_wins_diag)
         self.assertEqual("O", result)
 
-        board_X_wins_vert = board.Board(
-                              [["X", "X", ""],
-                               ["O", "X", "O"],
-                               ["O", "X", ""]])
+        board_X_wins_vert = [["X", "X", ""],
+                             ["O", "X", "O"],
+                             ["O", "X", ""]]
 
-        result = board_X_wins_vert.check_for_winner()
+        result = main.check_for_winner(board_X_wins_vert)
         self.assertEqual("X", result)
 
 
     def test_check_for_gameover(self):
       """Calls check_for_winner when the board is full"""
-      board_data = [["X", "X", "O"],
-                    ["O", "X", "X"],
-                    ["X", "O", "O"]]
-
-      board_game_over = board.Board()
-      board_game_over.fill_from_array(board_data)
-
-      result = board_game_over.check_for_winner()
+      board_game_over = [["X", "X", "O"],
+                         ["O", "X", "X"],
+                         ["X", "O", "O"]]
+      result = main.check_for_winner(board_game_over)
       self.assertEqual("N", result)
 
 
@@ -114,10 +107,10 @@ class BasicFunctionTests(u.TestCase):
 
     def test_CpuBetterStrategy_finds_winning_move_row(self):
       strategy = strategies.CpuBetterStrategy()
-      myboard = self.test_board
+      myboard = self.test_board.modify_board
       # TODO: change the following to use modify_board instead
-      myboard.modify_board(1, "X")
-      myboard.modify_board(2, "X")
+      myboard.modify_board(1,"X")
+      myboard.modify_board(2,"X")
       self.assertEqual(3, strategy.check_for_winning_move(self.test_board, "X"))
       self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "O"))
 
@@ -165,79 +158,78 @@ class BasicFunctionTests(u.TestCase):
 
     def test_CpuBetterStrategy_no_winning_move_col(self):
       strategy = strategies.CpuBetterStrategy()
-      myboard = self.test_board
-      myboard.modify_board(2, "O")
+      myboard = self.test_board.modify_board
+      myboard.modify_board(2,"O")
       self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "X"))
       self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "O"))
 
     def test_CpuBetterStrategy_blocked_winning_move_row(self):
       strategy = strategies.CpuBetterStrategy()
-      myboard = self.test_board
-      myboard.modify_board(1, "X")
-      myboard.modify_board(2, "X")
-      myboard.modify_board(3, "O")
+      myboard = self.test_board.modify_board
+      myboard.modify_board(1,"X")
+      myboard.modify_board(2,"X")
+      myboard.modify_board(7,"O")
       self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "X"))
-      self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "O"))
+      self.assertEqual(None, strategy.check_for_winning_move(self.test_board,"O"))
 
     def test_CpuBetterStrategy_blocked_winning_move_col(self):
       strategy = strategies.CpuBetterStrategy()
-      myboard = self.test_board
-      myboard.modify_board(2, "O")
-      myboard.modify_board(5, "X")
-      myboard.modify_board(8, "O")
+      myboard = self.test_board.modify_board
+      myboard[0][1] = "O"
+      myboard[1][1] = "X"
+      myboard[2][1] = "O"
       self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "X"))
       self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "O"))
 
     def test_CpuBetterStrategy_finds_winning_move_diag1(self):
       strategy = strategies.CpuBetterStrategy()
-      myboard = self.test_board
-
-      myboard.modify_board(1, "O")
-      myboard.modify_board(9, "O")
+      myboard = self.test_board.modify_board
+      myboard[0][0] = "O"
+      myboard[2][2] = "O"
       self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "X"))
       self.assertEqual(5, strategy.check_for_winning_move(self.test_board, "O"))
 
     def test_CpuBetterStrategy_finds_winning_move_diag2(self):
       strategy = strategies.CpuBetterStrategy()
-      myboard = self.test_board
-      myboard.modify_board(3, "X")
-      myboard.modify_board(5, "X")
+      myboard = self.test_board.modify_board
+      myboard[0][2] = "X"
+      myboard[1][1] = "X"
       self.assertEqual(7, strategy.check_for_winning_move(self.test_board, "X"))
       self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "O"))
 
     def test_CpuBetterStrategy_blocked_winning_move_diag2(self):
       strategy = strategies.CpuBetterStrategy()
-      myboard = self.test_board
-
-      myboard.modify_board(3, "X")
-      myboard.modify_board(5, "X")
-      myboard.modify_board(7, "O")
-
+      myboard = self.test_board.modify_board
+      myboard[0][2] = "X"
+      myboard[1][1] = "X"
+      myboard[2][0] = "O"
       self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "X"))
       self.assertEqual(None, strategy.check_for_winning_move(self.test_board, "O"))
 
     def test_CpuBetterStrategy_plays_winning_move(self):
       strategy = strategies.CpuBetterStrategy()
-      myboard = self.test_board
-      myboard.modify_board(1, "O")
+      myboard = self.test_board.modify_board
+      myboard[0][0] = "O"
       # This should already be true: myboard[1][1] = 5
-      myboard.modify_board(9, "O")
-      self.assertEqual(5, myboard.get_symbol(1, 1))
-      strategy.make_turn(myboard)
-      self.assertEqual("O", myboard.get_symbol(1, 1))
+      myboard[2][2] = "O"
+      self.assertEqual(5, myboard[1][1])
+      strategy.make_turn()
+      self.assertEqual("O", myboard[1][1])
 
     def test_CpuBetterStrategy_plays_blocking_move(self):
       strategy = strategies.CpuBetterStrategy()
-      myboard = self.test_board
-
-      myboard.modify_board(1, "X")
-      myboard.modify_board(2, "X")
+      myboard = self.test_board.modify_board
+      myboard[0][0] = "X"
+      myboard[0][1] = "X"
       # This should already be true: myboard[0][2] = 3
 
-      self.assertEqual(3, myboard.get_symbol(0, 2))
-      strategy.make_turn(myboard)
-      self.assertEqual("O", myboard.get_symbol(0, 2))
+      self.assertEqual(3, myboard[0][2])
+      strategy.make_turn()
+      self.assertEqual("O", myboard[0][2])
 
+
+
+#
 
 if __name__ == '__main__':
     u.main()
