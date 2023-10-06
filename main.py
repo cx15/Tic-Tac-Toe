@@ -2,9 +2,11 @@ import board
 import strategies
 from display import print_game_board
 
-input("pick pvp pvc")
-
-
+game_mode = int(input("which mode would you like to play:pvp pvc cvp cvc"))
+if game_mode = "pvc":
+  player_symbol = 'X'
+elif game_mode = 'cvp':
+  player_symbol = 'O'
 # TODOs
 # We will:
 # 1) Make the game work DONE
