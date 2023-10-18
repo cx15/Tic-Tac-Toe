@@ -2,11 +2,7 @@ import board
 import strategies
 from display import print_game_board
 
-game_mode = int(input("which mode would you like to play:pvp pvc cvp cvc"))
-if game_mode =  "pvc":
-  player_symbol = 'X'
-elif game_mode = 'cvp':
-  player_symbol = 'O'
+
 # TODOs
 # We will:
 # 1) Make the game work DONE
@@ -34,18 +30,39 @@ turn_counter = 0
 if __name__ == "__main__":
     print("welcome to Tic Tac Toe")
     print("----------------------")
+    game_mode = input("which mode would you like to play:pvp pvc cvp cvc")
 
-    cpu_strategy = strategies.CpuMirrorStrategy()
+    player1_human = (game_mode[0] == "p")
+    player2_human = (game_mode in ["pvp", "cvp"])
+
+    player1_cpu = (game_mode[0] == "c")
+    player2_cpu = (game_mode in ["cvc", "pvc"])
+
+    cpu_strat1 = strategies.CpuRandomStrategy()
+    cpu_strat2 = strategies.CpuRandomStrategy()
     game_board = board.Board()
 
     while not leave_loop:
       # the player's turn
       if turn_counter % 2 == 0:
-        player_turn(game_board, 'X')
+       # player_turn(game_board, 'X')
+        if player1_human:
+            player_turn(game_board,'X')
+        else:
+            cpu_strat1.make_turn(game_board)
       else:
-        # the computer's turn
+        if player2_human:
+            player_turn(game_board,'O')
+        else:
+            cpu_strat2.make_turn(game_board)
+     #""" else:
+      #  if player1_cpu:
+      #      print()
+       # else:
+       #     print()"""
+
         #cpu_strategy.make_turn(game_board)
-        player_turn(game_board, 'O')
+
       turn_counter += 1
 
       winner = game_board.check_for_winner()
