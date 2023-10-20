@@ -38,8 +38,8 @@ if __name__ == "__main__":
     player1_cpu = (game_mode[0] == "c")
     player2_cpu = (game_mode in ["cvc", "pvc"])
 
-    cpu_strat1 = strategies.CpuRandomStrategy()
-    cpu_strat2 = strategies.CpuRandomStrategy()
+    cpu_strat1 = strategies.CpuBetterStrategy()
+    cpu_strat2 = strategies.CpuBetterStrategy()
     game_board = board.Board()
 
     while not leave_loop:
@@ -49,12 +49,12 @@ if __name__ == "__main__":
         if player1_human:
             player_turn(game_board,'X')
         else:
-            cpu_strat1.make_turn(game_board)
+            cpu_strat1.make_turn(game_board=game_board, cpu_x="X")
       else:
         if player2_human:
             player_turn(game_board,'O')
         else:
-            cpu_strat2.make_turn(game_board)
+            cpu_strat2.make_turn(game_board=game_board, cpu_x="O")
      #""" else:
       #  if player1_cpu:
       #      print()

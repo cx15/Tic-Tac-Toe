@@ -3,19 +3,18 @@ import random
 
 
 class Strategy:
-    def make_turn(self, game_board: board.Board):
+    def make_turn(self, cpu_x: str, game_board: board.Board):
         raise NotImplementedError("You need to implement this")
 
 class CpuRandomStrategy(Strategy):
-    def make_turn(self, game_board: board.Board):
+    def make_turn(self, cpu_x: str, game_board: board.Board):
         cpu_choice = random.choice(game_board.get_open_positions())
         print("\nCpu choice: ", cpu_choice)
-        game_board.modify_board(cpu_choice, 'O')
+        game_board.modify_board(cpu_choice, cpu_x)
 
 
 class CpuBetterStrategy(Strategy):
-    def check_for_winning_move(
-        self, board_to_check: board.Board, symbol: str):
+    def check_for_winning_move( self, board_to_check: board.Board, symbol: str,):
         """Check the board to see if there's a winning move available for the
         given symbol.
 
@@ -75,12 +74,12 @@ class CpuBetterStrategy(Strategy):
             return empty_col_index
         return None
 
-    def make_turn(self, game_board: board.Board) -> None:
+    def make_turn(self, game_board: board.Board, cpu_x: str) -> None:
         cpu_choice = random.choice(game_board.get_open_positions())
         # Check for a winning move
-        winning_move = self.check_for_winning_move(game_board, "O")
+        winning_move = self.check_for_winning_move(game_board, cpu_x)
 
-        blocking_move = self.check_for_winning_move(game_board, "X")
+        blocking_move = self.check_for_winning_move(game_board,"O" if cpu_x == "X" else "X")
         if blocking_move:
             #print("We spotted a blocking move!")
             cpu_choice = blocking_move
@@ -91,7 +90,7 @@ class CpuBetterStrategy(Strategy):
 
         print("\nCpu choice: ", cpu_choice)
         if game_board.is_valid_play(cpu_choice):
-            game_board.modify_board(cpu_choice, 'O')
+            game_board.modify_board(cpu_choice, cpu_x)
         else:
             raise Exception("CPU choice wasn't a valid play")
 

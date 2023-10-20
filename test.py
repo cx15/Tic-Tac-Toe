@@ -216,7 +216,7 @@ class BasicFunctionTests(u.TestCase):
       # This should already be true: myboard[1][1] = 5
       myboard.modify_board(9, "O")
       self.assertEqual(5, myboard.get_symbol(1, 1))
-      strategy.make_turn(myboard)
+      strategy.make_turn(myboard, "O")
       self.assertEqual("O", myboard.get_symbol(1, 1))
 
     def test_CpuBetterStrategy_plays_blocking_move(self):
@@ -227,7 +227,7 @@ class BasicFunctionTests(u.TestCase):
       # This should already be true: myboard[0][2] = 3
 
       self.assertEqual(3, myboard.get_symbol(0, 2))
-      strategy.make_turn(myboard)
+      strategy.make_turn(myboard, "O")
       self.assertEqual("O", myboard.get_symbol(0, 2))
 
 
