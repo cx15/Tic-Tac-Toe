@@ -33,7 +33,7 @@ class CpuBetterStrategy(Strategy):
                 elif board_to_check.get_symbol(row, col) in range(0, 10):
                     empty_col_index = board_to_check.get_symbol(
                         col=col, row=row)
-            if symbol_count == 2:
+            if symbol_count == 2 and empty_col_index:
                 # We have a winning move!
                 return empty_col_index
 
@@ -46,7 +46,7 @@ class CpuBetterStrategy(Strategy):
                     symbol_count += 1
                 elif board_to_check.get_symbol(row, col) in range(0, 10):
                     empty_col_index = board_to_check.get_symbol(row, col)
-            if symbol_count == 2:
+            if symbol_count == 2 and empty_col_index:
                 # We have a winning move!
                 return empty_col_index
 
@@ -57,7 +57,7 @@ class CpuBetterStrategy(Strategy):
                 symbol_count += 1
             elif board_to_check.get_symbol(idx, idx) in range(0, 10):
                 empty_col_index = board_to_check.get_symbol(idx, idx)
-        if symbol_count == 2:
+        if symbol_count == 2 and empty_col_index:
             # We have a winning move!
             return empty_col_index
 
@@ -69,7 +69,7 @@ class CpuBetterStrategy(Strategy):
                 symbol_count += 1
             elif board_to_check.get_symbol(idx, col) in range(0, 10):
                 empty_col_index = board_to_check.get_symbol(idx, col)
-        if symbol_count == 2:
+        if symbol_count == 2 and empty_col_index:
             # We have a winning move!
             return empty_col_index
         return None

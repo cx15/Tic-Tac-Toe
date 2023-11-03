@@ -55,13 +55,6 @@ if __name__ == "__main__":
             player_turn(game_board,'O')
         else:
             cpu_strat2.make_turn(game_board=game_board, cpu_x="O")
-     #""" else:
-      #  if player1_cpu:
-      #      print()
-       # else:
-       #     print()"""
-
-        #cpu_strategy.make_turn(game_board)
 
       turn_counter += 1
 

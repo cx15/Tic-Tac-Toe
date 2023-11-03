@@ -25,6 +25,8 @@ class Board:
     :param num - a number from 1 to 9 representing a position on the board
     :param turn - either "X" or "O" depending on the turn.
 """
+    if turn not in ["O", "X"]:
+      return
     row, col = self.row_col_from_num(num)
     self._board[row][col] = turn
     self._remaining_positions.remove(num)
@@ -58,7 +60,9 @@ class Board:
     idx = 1
     for row in range(0, 3):
       for col in range(0, 3):
-        self.modify_board(idx, data[row][col])
+        val = data[row][col]
+        if val:
+          self.modify_board(idx, data[row][col])
         idx += 1
 
   def check_for_winner(self):

@@ -230,9 +230,22 @@ class BasicFunctionTests(u.TestCase):
       strategy.make_turn(myboard, "O")
       self.assertEqual("O", myboard.get_symbol(0, 2))
 
+    def test_BadBoardConfiguration(self):
+      """Exposes a bug found in play testing."""
+      board_under_test = board.Board(initial_data=
+                                    [["X", "X", "O"],
+                                     ["",  "O", ""],
+                                     ["", "O", "X"]])
+
+      strategy = strategies.CpuBetterStrategy()
+      winning_move = strategy.check_for_winning_move(board_under_test, "O")
+      self.assertEqual(7, winning_move)
+      strategy.make_turn(board_under_test, "O")
+      result = board_under_test.check_for_winner()
+      self.assertEqual("O", result)
 
 
-#
+
 
 if __name__ == '__main__':
     u.main()
