@@ -1,7 +1,8 @@
 import board
 from display import print_game_board
 
-def play_game(player1_human, player2_human, cpu_strat1, cpu_strat2):
+def play_game(player1_human, player2_human, cpu_strat1, cpu_strat2,
+              do_print):
   leave_loop = False
   turn_counter = 0
 
@@ -22,19 +23,23 @@ def play_game(player1_human, player2_human, cpu_strat1, cpu_strat2):
         cpu_strat2.make_turn(game_board=game_board, cpu_x="O")
 
     turn_counter += 1
-
+    if do_print:
+      print_game_board(game_board)
     winner = game_board.check_for_winner()
     if winner == "O":
-      print("O has won!")
+      if do_print:
+        print("O has won!")
       leave_loop = True
     elif winner == "X":
-      print("X has won!")
+      if do_print:
+        print("X has won!")
       leave_loop = True
     elif winner == "N":
       leave_loop = True
-      print("\nGame over! Thank you for playing :)")
+      if do_print:
+        print("\nGame over! Thank you for playing :)")
 
-  return game_board
+  return game_board, winner
 
 
 def player_turn(game_board: board.Board, player_symbol='X'):

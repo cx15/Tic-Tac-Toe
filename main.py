@@ -27,7 +27,8 @@ if __name__ == "__main__":
     cpu_strat2 = strategies.CpuBetterStrategy()
 
     the_game_board = play_game(
-      player1_human, player2_human, cpu_strat1, cpu_strat2)
+      player1_human, player2_human, cpu_strat1, cpu_strat2,
+      do_print=True)
 
     print_game_board(the_game_board)
 

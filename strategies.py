@@ -9,7 +9,7 @@ class Strategy:
 class CpuRandomStrategy(Strategy):
     def make_turn(self, cpu_x: str, game_board: board.Board):
         cpu_choice = random.choice(game_board.get_open_positions())
-        print("\nCpu choice: ", cpu_choice)
+        # print("\nCpu choice: ", cpu_choice)
         game_board.modify_board(cpu_choice, cpu_x)
 
 
@@ -88,7 +88,7 @@ class CpuBetterStrategy(Strategy):
             #print("We spotted a winning move!")
             cpu_choice = winning_move
 
-        print("\nCpu choice: ", cpu_choice)
+        # print("\nCpu choice: ", cpu_choice)
         if game_board.is_valid_play(cpu_choice):
             game_board.modify_board(cpu_choice, cpu_x)
         else:
