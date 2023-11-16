@@ -7,7 +7,6 @@ import unittest as u
 
 import board
 import display
-import main
 import strategies
 
 
