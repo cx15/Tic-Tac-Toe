@@ -3,25 +3,34 @@ from display import print_game_board
 
 def play_game(player1_human, player2_human, cpu_strat1, cpu_strat2,
               do_print):
+  """
+  Returns the final game board
+  the winner "X", "O" or "N"
+  and the game history which is a list of the moves
+  alternating X and O.
+  """
   leave_loop = False
   turn_counter = 0
 
   game_board = board.Board()
+  history = []
 
   while not leave_loop:
     # the player's turn
+    move = None
     if turn_counter % 2 == 0:
       # player_turn(game_board, 'X')
       if player1_human:
-        player_turn(game_board, 'X')
+        move = player_turn(game_board, 'X')
       else:
-        cpu_strat1.make_turn(game_board=game_board, cpu_x="X")
+        move = cpu_strat1.make_turn(game_board=game_board, cpu_x="X")
     else:
       if player2_human:
-        player_turn(game_board, 'O')
+        move = player_turn(game_board, 'O')
       else:
-        cpu_strat2.make_turn(game_board=game_board, cpu_x="O")
+        move = cpu_strat2.make_turn(game_board=game_board, cpu_x="O")
 
+    history.append(move)
     turn_counter += 1
     if do_print:
       print_game_board(game_board)
@@ -39,7 +48,7 @@ def play_game(player1_human, player2_human, cpu_strat1, cpu_strat2,
       if do_print:
         print("\nGame over! Thank you for playing :)")
 
-  return game_board, winner
+  return game_board, winner, history
 
 
 def player_turn(game_board: board.Board, player_symbol='X'):
@@ -49,6 +58,6 @@ def player_turn(game_board: board.Board, player_symbol='X'):
     if (1 <= number_picked <= 9 and
         game_board.is_valid_play(number_picked)):
       game_board.modify_board(number_picked, player_symbol)
-      return
+      return number_picked
     else:
       print("Invalid input. Please try again.")

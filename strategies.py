@@ -3,14 +3,18 @@ import random
 
 
 class Strategy:
-    def make_turn(self, cpu_x: str, game_board: board.Board):
+    def make_turn(self, cpu_x: str, game_board: board.Board) -> int:
+        """
+        Returns the move that was made and updates the game board.
+        """
         raise NotImplementedError("You need to implement this")
 
 class CpuRandomStrategy(Strategy):
-    def make_turn(self, cpu_x: str, game_board: board.Board):
+    def make_turn(self, cpu_x: str, game_board: board.Board) -> int:
         cpu_choice = random.choice(game_board.get_open_positions())
         # print("\nCpu choice: ", cpu_choice)
         game_board.modify_board(cpu_choice, cpu_x)
+        return cpu_choice
 
 
 class CpuBetterStrategy(Strategy):
@@ -74,7 +78,7 @@ class CpuBetterStrategy(Strategy):
             return empty_col_index
         return None
 
-    def make_turn(self, game_board: board.Board, cpu_x: str) -> None:
+    def make_turn(self, game_board: board.Board, cpu_x: str) -> int:
         cpu_choice = random.choice(game_board.get_open_positions())
         # Check for a winning move
         winning_move = self.check_for_winning_move(game_board, cpu_x)
@@ -93,12 +97,13 @@ class CpuBetterStrategy(Strategy):
             game_board.modify_board(cpu_choice, cpu_x)
         else:
             raise Exception("CPU choice wasn't a valid play")
+        return cpu_choice
 
 class CpuMirrorStrategy(Strategy):
     """
     This Cpu strategy just tries to copy what the human player does.
     """
-    def make_turn(self, game_board: board.Board) -> None:
+    def make_turn(self, game_board: board.Board) -> int:
         # Go through all the positions and find the opposite
         """
         Actually don't need this map as the formula is simple: if the
@@ -121,7 +126,7 @@ class CpuMirrorStrategy(Strategy):
             possible_cpu_pos = 10 - pos
             if game_board.is_valid_play(possible_cpu_pos):
               game_board.modify_board(possible_cpu_pos, "O")
-              return
+              return possible_cpu_pos
 
         # None of the opposites were valid, so just pick randomly.
         cpu_choice = random.choice(game_board.get_open_positions())
@@ -129,3 +134,4 @@ class CpuMirrorStrategy(Strategy):
             game_board.modify_board(cpu_choice, 'O')
         else:
             raise Exception("CPU choice wasn't valid play")
+        return cpu_choice
